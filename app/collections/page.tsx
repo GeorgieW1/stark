@@ -11,7 +11,7 @@ export default function CollectionsPage() {
       id: "lagos-nights",
       name: "Lagos Nights",
       description: "Dark, bold pieces inspired by the city after sunset",
-      image: "/lagos-cityscape-at-night-urban-streetwear-lifestyl.jpg",
+      image: "/unnamed-6-scaled.jpg",
       itemCount: 12,
     },
     {

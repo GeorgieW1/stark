@@ -32,15 +32,50 @@ export default function HomePage() {
     <div className="bg-black">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Video Background */}
         <div className="absolute inset-0 z-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/stark-hero-lifestyle.jpg')",
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            preload="auto"
+          >
+            <source
+              src="/SaveClip.App_AQO3khYlZYrEo1FxAjU6WMtkXPBd9940UYyIu7drSlz1eCkpwtDQik2_WKQtxP2H6YuMT6wX2EOlgHS5Lu9T7m86ljmrUenlU5_uvVA.mp4"
+              type="video/mp4"
+            />
+          </video>
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90" />
+          {/* Animated gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#f4b5c1]/10 via-transparent to-[#f4b5c1]/10 animate-pulse" />
+        </div>
+
+        {/* Floating Elements */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-[#f4b5c1]/30 rounded-full"
+              initial={{
+                x: `${Math.random() * 100}%`,
+                y: `${Math.random() * 100}%`,
+                opacity: 0.3,
+              }}
+              animate={{
+                y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`, `${Math.random() * 100}%`],
+                x: [`${Math.random() * 100}%`, `${Math.random() * 100}%`, `${Math.random() * 100}%`],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 10,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "linear",
+              }}
+            />
+          ))}
         </div>
 
         {/* Hero Content */}
@@ -48,53 +83,127 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1 }}
             className="space-y-8"
           >
+            {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20"
+              initial={{ opacity: 0, scale: 0.8, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8, type: "spring", stiffness: 200 }}
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/30 shadow-lg"
             >
-              <Sparkles className="h-4 w-4 text-[#f4b5c1]" />
-              <span className="text-sm font-medium text-white">Premium Unisex Streetwear</span>
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+              >
+                <Sparkles className="h-4 w-4 text-[#f4b5c1]" />
+              </motion.div>
+              <span className="text-sm font-semibold text-white tracking-wide">Premium Unisex Streetwear</span>
             </motion.div>
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight text-balance">
-              STARK
-              <br />
-              <span className="text-[#f4b5c1]">COLLECTION</span>
-            </h1>
+            {/* Main Title */}
+            <div className="space-y-4">
+              <motion.h1
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white leading-none tracking-tight"
+              >
+                <motion.span
+                  animate={{
+                    textShadow: [
+                      "0 0 20px rgba(244,181,193,0.5)",
+                      "0 0 30px rgba(244,181,193,0.8)",
+                      "0 0 20px rgba(244,181,193,0.5)",
+                    ],
+                  }}
+                  transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+                  className="block"
+                >
+                  STARK
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8, duration: 0.8 }}
+                  className="block text-[#f4b5c1] bg-gradient-to-r from-[#f4b5c1] to-white bg-clip-text text-transparent"
+                >
+                  COLLECTION
+                </motion.span>
+              </motion.h1>
+            </div>
 
-            <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto text-pretty">
-              Best travel outfits. Unisex boutiques. Order, pay, receive. Nationwide delivery. All fixed prices.
-            </p>
-
-            <motion.div
+            {/* Subtitle */}
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              transition={{ delay: 1, duration: 0.8 }}
+              className="text-xl sm:text-2xl md:text-3xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed"
+            >
+              <span className="font-semibold">Premium Nigerian Streetwear</span>
+              <br />
+              <span className="text-white/70">Designed in Lagos. Worn Worldwide.</span>
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4"
             >
               <Link href="/shop">
-                <Button
-                  size="lg"
-                  className="bg-white text-black hover:bg-[#f4b5c1] hover:text-black text-lg px-8 py-6 group"
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  Shop Now
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                  <Button
+                    size="lg"
+                    className="bg-white text-black hover:bg-[#f4b5c1] hover:text-black text-lg px-10 py-7 group shadow-2xl font-semibold tracking-wide"
+                  >
+                    Shop Now
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+                  </Button>
+                </motion.div>
               </Link>
               <Link href="/collections">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-black text-lg px-8 py-6 bg-transparent"
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  View Collections
-                </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-white/50 text-white hover:bg-white hover:text-black text-lg px-10 py-7 bg-white/5 backdrop-blur-sm font-semibold tracking-wide shadow-xl"
+                  >
+                    Explore Collections
+                  </Button>
+                </motion.div>
               </Link>
+            </motion.div>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              className="flex flex-wrap items-center justify-center gap-8 pt-8 text-white/80"
+            >
+              <div className="text-center">
+                <div className="text-2xl font-bold text-[#f4b5c1]">Nationwide</div>
+                <div className="text-sm">Delivery</div>
+              </div>
+              <div className="w-px h-8 bg-white/30" />
+              <div className="text-center">
+                <div className="text-2xl font-bold text-[#f4b5c1]">Premium</div>
+                <div className="text-sm">Quality</div>
+              </div>
+              <div className="w-px h-8 bg-white/30" />
+              <div className="text-center">
+                <div className="text-2xl font-bold text-[#f4b5c1]">Unisex</div>
+                <div className="text-sm">Design</div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -103,15 +212,19 @@ export default function HomePage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
-            className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2"
+            className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2 backdrop-blur-sm bg-white/10"
           >
-            <motion.div className="w-1 h-2 bg-white/60 rounded-full" />
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
+              className="w-1.5 h-3 bg-[#f4b5c1] rounded-full"
+            />
           </motion.div>
         </motion.div>
       </section>

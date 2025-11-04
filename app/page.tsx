@@ -191,7 +191,7 @@ export default function HomePage() {
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
-                    backgroundImage: "url('/stark-brand-story.jpg')",
+                    backgroundImage: "url('/SaveClip.App_573165403_18077691014155656_5474932771996079243_n.jpg')",
                   }}
                 />
               </div>

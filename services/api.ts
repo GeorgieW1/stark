@@ -66,7 +66,7 @@ const MOCK_PRODUCTS: Product[] = [
     description:
       "Premium oversized hoodie with embroidered STARK branding. Soft cotton blend with a relaxed fit. Available in pink with grey accents.",
     category: "unisex",
-    images: ["/pink-embroidered-stark-hoodie-oversized.jpg", "/pink-hoodie-back-view.jpg"],
+    images: ["/SaveClip.App_571445939_18077190074155656_3678702186249413007_n.jpg", "/SaveClip.App_571972715_18077436095155656_8508195319942056107_n.jpg"],
     sizes: ["S", "M", "L", "XL", "XXL"],
     inStock: true,
     featured: true,
@@ -78,7 +78,7 @@ const MOCK_PRODUCTS: Product[] = [
     description:
       "Classic black oversized hoodie with embroidered STARK logo. Premium heavyweight cotton for durability and comfort.",
     category: "unisex",
-    images: ["/black-embroidered-stark-hoodie.jpg", "/black-hoodie-lifestyle.jpg"],
+    images: ["/SaveClip.App_572147876_18077634716155656_6547323135376726351_n.jpg", "/SaveClip.App_572203968_18077690987155656_6694396088596332871_n.jpg"],
     sizes: ["S", "M", "L", "XL", "XXL"],
     inStock: true,
     featured: true,
@@ -90,7 +90,7 @@ const MOCK_PRODUCTS: Product[] = [
     description:
       "Complete tracksuit set in rich burgundy. Includes matching hoodie and joggers with embroidered STARK branding. Perfect for lifestyle wear.",
     category: "unisex",
-    images: ["/burgundy-stark-tracksuit-set.jpg", "/burgundy-tracksuit-lifestyle.jpg"],
+    images: ["/SaveClip.App_572711138_18077691005155656_1110256909655516316_n.jpg", "/SaveClip.App_573153613_18077452118155656_3650618018436970485_n.jpg"],
     sizes: ["S", "M", "L", "XL"],
     inStock: true,
     featured: true,
@@ -102,7 +102,7 @@ const MOCK_PRODUCTS: Product[] = [
     description:
       "Minimalist cream-colored hoodie with subtle STARK embroidery. Versatile piece that pairs with any outfit.",
     category: "unisex",
-    images: ["/cream-oversized-stark-hoodie.jpg", "/cream-hoodie-detail.jpg"],
+    images: ["/SaveClip.App_573165403_18077691014155656_5474932771996079243_n.jpg", "/SaveClip.App_573597029_18077436077155656_6339063922354062092_n.jpg"],
     sizes: ["S", "M", "L", "XL", "XXL"],
     inStock: true,
     featured: true,
@@ -114,7 +114,7 @@ const MOCK_PRODUCTS: Product[] = [
     description:
       "Premium black tracksuit with embroidered STARK branding. Includes hoodie and matching joggers. Unisex fit.",
     category: "unisex",
-    images: ["/black-stark-tracksuit-premium.jpg", "/black-tracksuit-full-look.jpg"],
+    images: ["/SaveClip.App_573826885_18077634725155656_4177940957292664023_n.jpg", "/SaveClip.App_573906262_18077436086155656_5754688778190661362_n.jpg"],
     sizes: ["S", "M", "L", "XL"],
     inStock: true,
   },
@@ -125,7 +125,7 @@ const MOCK_PRODUCTS: Product[] = [
     description:
       "Soft grey hoodie with embroidered STARK logo and pink accents. Comfortable oversized fit for everyday wear.",
     category: "unisex",
-    images: ["/grey-stark-hoodie-pink-accents.jpg", "/grey-hoodie-lifestyle.jpg"],
+    images: ["/SaveClip.App_571445939_18077190074155656_3678702186249413007_n.jpg", "/SaveClip.App_571972715_18077436095155656_8508195319942056107_n.jpg"],
     sizes: ["S", "M", "L", "XL", "XXL"],
     inStock: true,
   },
@@ -136,7 +136,7 @@ const MOCK_PRODUCTS: Product[] = [
     description:
       "Premium black joggers with embroidered STARK branding. Comfortable fit with tapered ankles. Perfect for casual or athletic wear.",
     category: "unisex",
-    images: ["/black-stark-joggers-premium.jpg", "/black-joggers-detail.jpg"],
+    images: ["/SaveClip.App_572147876_18077634716155656_6547323135376726351_n.jpg", "/SaveClip.App_572203968_18077690987155656_6694396088596332871_n.jpg"],
     sizes: ["S", "M", "L", "XL"],
     inStock: true,
   },
@@ -147,7 +147,7 @@ const MOCK_PRODUCTS: Product[] = [
     description:
       "Elegant cream tracksuit set with embroidered STARK logo. Includes hoodie and joggers. Versatile neutral tone.",
     category: "unisex",
-    images: ["/cream-stark-tracksuit-elegant.jpg", "/placeholder.svg?height=500&width=500"],
+    images: ["/SaveClip.App_572711138_18077691005155656_1110256909655516316_n.jpg", "/SaveClip.App_573153613_18077452118155656_3650618018436970485_n.jpg"],
     sizes: ["S", "M", "L", "XL"],
     inStock: true,
   },

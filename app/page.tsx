@@ -177,6 +177,78 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Video Showcase */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Behind the Brand</h2>
+            <p className="text-white/60 text-lg">Experience STARK through our lens</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Video 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="relative group rounded-lg overflow-hidden bg-neutral-900 shadow-2xl"
+            >
+              <div className="relative aspect-[9/16] lg:aspect-video">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls
+                  preload="auto"
+                >
+                  <source
+                    src="/SaveClip.App_AQO6IDYGNVFjPyFaJfk-HuDIl0tmKWyWNxkR4Pl7KrfvR5Fe0Ir7ZyPfU2-XzCMG77fb1fifQRFDJNTT1cnngsLN5pLOmjsLVQTMDTQ.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </motion.div>
+
+            {/* Video 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative group rounded-lg overflow-hidden bg-neutral-900 shadow-2xl"
+            >
+              <div className="relative aspect-[9/16] lg:aspect-video">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls
+                  preload="auto"
+                >
+                  <source
+                    src="/SaveClip.App_AQPD92rVeUgIOwqBc9wGDcxaUT9BlTsRqA8QFd1trUJF1VUApODti80A6kNlvcrsJYdC2hI3-3MH3FmPsBMdHjQYclqusERQAiY22vQ.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Brand Story */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
         <div className="max-w-7xl mx-auto">

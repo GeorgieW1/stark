@@ -5,6 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { Lock, CreditCard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -28,16 +29,48 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Basic validation
+    if (!formData.fullName.trim() || !formData.email.trim() || !formData.phone.trim() || 
+        !formData.address.trim() || !formData.city.trim() || !formData.state.trim()) {
+      alert("Please fill in all required fields")
+      return
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      alert("Please enter a valid email address")
+      return
+    }
+
+    // Phone validation (basic)
+    const phoneRegex = /^[\d\s\-\+\(\)]+$/
+    if (!phoneRegex.test(formData.phone)) {
+      alert("Please enter a valid phone number")
+      return
+    }
+
     setLoading(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      // TODO: Replace with actual API call to your backend
+      // const response = await api.post("/checkout", { formData, items, totalPrice: finalTotal })
+      
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    console.log("[v0] Checkout data:", { formData, items, totalPrice })
+      console.log("[v0] Checkout data:", { formData, items, totalPrice })
 
-    // Clear cart and redirect to success page
-    clearCart()
-    router.push("/checkout/success")
+      // Clear cart and redirect to success page
+      clearCart()
+      router.push("/checkout/success")
+    } catch (error) {
+      console.error("Checkout error:", error)
+      alert("There was an error processing your order. Please try again.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -257,11 +290,13 @@ export default function CheckoutPage() {
                 <div className="space-y-4 max-h-64 overflow-y-auto">
                   {items.map((item) => (
                     <div key={`${item.product.id}-${item.size}`} className="flex gap-4">
-                      <div className="relative w-16 h-16 flex-shrink-0 rounded bg-neutral-900">
-                        <img
+                      <div className="relative w-16 h-16 flex-shrink-0 rounded bg-neutral-900 overflow-hidden">
+                        <Image
                           src={item.product.images[0] || "/placeholder.svg"}
                           alt={item.product.name}
-                          className="w-full h-full object-cover rounded"
+                          fill
+                          className="object-cover rounded"
+                          sizes="64px"
                         />
                         <div className="absolute -top-2 -right-2 bg-[#f4b5c1] text-black text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
                           {item.quantity}

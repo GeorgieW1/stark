@@ -9,7 +9,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold">
-              LAGOS<span className="text-[#f4b5c1]">WEAR</span>
+              <span className="text-white">STARK</span>
             </h3>
             <p className="text-white/60 text-sm">Premium Nigerian streetwear. Crafted in Lagos, worn worldwide.</p>
           </div>
@@ -46,24 +46,20 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Support</h4>
             <ul className="space-y-2 text-sm text-white/60">
               <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-white transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <a href="mailto:support@stark.com" className="hover:text-white transition-colors">
                   Contact Us
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/shipping" className="hover:text-white transition-colors">
-                  Shipping Info
-                </Link>
+                <span className="text-white/60">Shipping: Nationwide delivery</span>
               </li>
               <li>
-                <Link href="/returns" className="hover:text-white transition-colors">
-                  Returns
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="hover:text-white transition-colors">
-                  FAQ
-                </Link>
+                <span className="text-white/60">Free shipping over ₦50,000</span>
               </li>
             </ul>
           </div>
@@ -101,7 +97,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-white/60">
-          <p>&copy; {new Date().getFullYear()} LagosWear. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} STARK. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -18,19 +18,34 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
+  const [isMounted, setIsMounted] = useState(false)
 
-  // Load cart from localStorage on mount
+  // Load cart from localStorage on mount (client-side only)
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart")
-    if (savedCart) {
-      setItems(JSON.parse(savedCart))
+    setIsMounted(true)
+    try {
+      const savedCart = localStorage.getItem("cart")
+      if (savedCart) {
+        setItems(JSON.parse(savedCart))
+      }
+    } catch (error) {
+      console.error("Failed to load cart from localStorage:", error)
     }
   }, [])
 
-  // Save cart to localStorage whenever it changes
+  // Save cart to localStorage whenever it changes (client-side only)
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(items))
-  }, [items])
+    if (!isMounted) return
+    try {
+      localStorage.setItem("cart", JSON.stringify(items))
+    } catch (error) {
+      console.error("Failed to save cart to localStorage:", error)
+      // Handle quota exceeded or other localStorage errors
+      if (error instanceof DOMException && error.name === "QuotaExceededError") {
+        console.warn("localStorage quota exceeded. Cart may not be saved.")
+      }
+    }
+  }, [items, isMounted])
 
   const addItem = (product: Product, size: string, quantity = 1) => {
     setItems((prev) => {

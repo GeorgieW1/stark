@@ -5,36 +5,69 @@ import "./globals.css";
 import { CartProvider } from "@/context/cart-context";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { Analytics } from "@vercel/analytics/react";
 
-// ✅ Import all fonts once, cleanly
-import { Geist, Geist_Mono, Source_Serif_4, Outfit } from "next/font/google";
+// ✅ Import only needed font
+import { Outfit } from "next/font/google";
 
-// ✅ Initialize fonts
-const geist = Geist({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
-
-const sourceSerif4 = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-});
-
+// ✅ Initialize font with only needed weights
 const outfit = Outfit({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
-// ✅ Page metadata
+// ✅ Enhanced SEO metadata
 export const metadata: Metadata = {
-  title: "STARK - Premium Nigerian Streetwear",
+  title: {
+    default: "STARK - Premium Nigerian Streetwear",
+    template: "%s | STARK",
+  },
   description:
     "STARK: Premium unisex streetwear designed in Lagos. Best travel outfits, nationwide delivery. Order, pay, receive.",
-  generator: "v0.app",
+  keywords: ["streetwear", "Nigerian fashion", "Lagos", "unisex clothing", "premium fashion", "STARK"],
+  authors: [{ name: "STARK" }],
+  creator: "STARK",
+  publisher: "STARK",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "STARK",
+    title: "STARK - Premium Nigerian Streetwear",
+    description: "Premium unisex streetwear designed in Lagos. Best travel outfits, nationwide delivery.",
+    images: [
+      {
+        url: "/stark-hero-lifestyle.jpg",
+        width: 1200,
+        height: 630,
+        alt: "STARK Premium Streetwear",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "STARK - Premium Nigerian Streetwear",
+    description: "Premium unisex streetwear designed in Lagos. Best travel outfits, nationwide delivery.",
+    images: ["/stark-hero-lifestyle.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 // ✅ Layout component
@@ -51,6 +84,7 @@ export default function RootLayout({
           <main className="min-h-screen pt-16">{children}</main>
           <Footer />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );

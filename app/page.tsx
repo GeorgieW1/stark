@@ -241,10 +241,24 @@ export default function HomePage() {
           <p className="text-white/70 text-lg">
             Get early access to new drops, exclusive offers, and behind-the-scenes content from STARK.
           </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault()
+              const formData = new FormData(e.currentTarget)
+              const email = formData.get("email") as string
+              // TODO: Integrate with email service (e.g., Mailchimp, ConvertKit)
+              console.log("Newsletter subscription:", email)
+              // Show success message
+              alert("Thank you for subscribing! Check your email for confirmation.")
+              e.currentTarget.reset()
+            }}
+            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+          >
             <input
               type="email"
+              name="email"
               placeholder="Enter your email"
+              required
               className="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#f4b5c1]"
             />
             <Button type="submit" size="lg" className="bg-[#f4b5c1] text-black hover:bg-[#f4b5c1]/90 px-8">

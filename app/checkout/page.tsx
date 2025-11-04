@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useCart } from "@/context/cart-context"
+import { orderAPI } from "@/services/api"
 import type { CheckoutFormData } from "@/lib/types"
 
 export default function CheckoutPage() {
@@ -54,20 +55,43 @@ export default function CheckoutPage() {
     setLoading(true)
 
     try {
-      // TODO: Replace with actual API call to your backend
-      // const response = await api.post("/checkout", { formData, items, totalPrice: finalTotal })
-      
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      // Call backend API to create order
+      const response = await orderAPI.createOrder({
+        items: items.map((item) => ({
+          productId: item.product.id,
+          size: item.size,
+          quantity: item.quantity,
+          price: item.product.price,
+        })),
+        customer: {
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+        },
+        paymentMethod: formData.paymentMethod,
+        subtotal: totalPrice,
+        shipping: shippingFee,
+        total: finalTotal,
+      })
 
-      console.log("[v0] Checkout data:", { formData, items, totalPrice })
+      // If payment gateway URL is provided, redirect to payment
+      if (response.paymentUrl) {
+        window.location.href = response.paymentUrl
+        return
+      }
 
-      // Clear cart and redirect to success page
+      // Otherwise, redirect to success page
       clearCart()
-      router.push("/checkout/success")
-    } catch (error) {
+      const orderId = response.orderId || "unknown"
+      router.push(`/checkout/success?orderId=${orderId}`)
+    } catch (error: any) {
       console.error("Checkout error:", error)
-      alert("There was an error processing your order. Please try again.")
+      const errorMessage =
+        error.response?.data?.message || "There was an error processing your order. Please try again."
+      alert(errorMessage)
     } finally {
       setLoading(false)
     }

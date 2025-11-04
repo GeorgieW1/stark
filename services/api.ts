@@ -1,6 +1,14 @@
 import axios from "axios"
 import type { Product, User } from "@/lib/types"
 
+// ============================================================================
+// API CONFIGURATION
+// ============================================================================
+// Set your backend API URL in .env.local file:
+// NEXT_PUBLIC_API_BASE_URL=https://your-backend-api.com/api
+// 
+// For production, add it to Vercel environment variables with the same name
+// ============================================================================
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api"
 
 const api = axios.create({
@@ -10,10 +18,48 @@ const api = axios.create({
   },
 })
 
-// Product APIs
+// Add authentication token to requests if available
+api.interceptors.request.use((config) => {
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token")
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+  }
+  return config
+})
+
+// Handle API errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Unauthorized - clear token and redirect to login
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("token")
+        // window.location.href = "/login" // Uncomment when login page exists
+      }
+    }
+    return Promise.reject(error)
+  }
+)
+
+// ============================================================================
+// PRODUCT APIs
+// ============================================================================
+// TODO: Replace mock data with real API calls
+// Expected endpoints:
+// - GET /products - Get all products
+// - GET /products/:id - Get single product
+// - GET /products?category=:category - Filter by category
+// ============================================================================
 export const productAPI = {
   getAll: async (): Promise<Product[]> => {
-    // Placeholder - replace with actual API call
+    // TODO: Replace with actual API call
+    // const response = await api.get("/products")
+    // return response.data
+    
+    // Temporary mock data - REMOVE when backend is ready
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(MOCK_PRODUCTS)
@@ -22,7 +68,11 @@ export const productAPI = {
   },
 
   getById: async (id: string): Promise<Product> => {
-    // Placeholder - replace with actual API call
+    // TODO: Replace with actual API call
+    // const response = await api.get(`/products/${id}`)
+    // return response.data
+    
+    // Temporary mock data - REMOVE when backend is ready
     return new Promise((resolve) => {
       setTimeout(() => {
         const product = MOCK_PRODUCTS.find((p) => p.id === id)
@@ -32,7 +82,11 @@ export const productAPI = {
   },
 
   getByCategory: async (category: string): Promise<Product[]> => {
-    // Placeholder - replace with actual API call
+    // TODO: Replace with actual API call
+    // const response = await api.get(`/products?category=${category}`)
+    // return response.data
+    
+    // Temporary mock data - REMOVE when backend is ready
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(MOCK_PRODUCTS.filter((p) => p.category === category))
@@ -41,20 +95,79 @@ export const productAPI = {
   },
 }
 
-// Auth APIs (placeholders for future integration)
+// ============================================================================
+// AUTH APIs
+// ============================================================================
+// Expected endpoints:
+// - POST /auth/signup - Register new user
+// - POST /auth/login - Login user
+// - POST /auth/logout - Logout user
+// ============================================================================
 export const authAPI = {
   signup: async (email: string, password: string, name: string): Promise<User> => {
     const response = await api.post("/auth/signup", { email, password, name })
-    return response.data
+    // Store token if provided by backend
+    if (response.data.token && typeof window !== "undefined") {
+      localStorage.setItem("token", response.data.token)
+    }
+    return response.data.user || response.data
   },
 
   login: async (email: string, password: string): Promise<User> => {
     const response = await api.post("/auth/login", { email, password })
-    return response.data
+    // Store token if provided by backend
+    if (response.data.token && typeof window !== "undefined") {
+      localStorage.setItem("token", response.data.token)
+    }
+    return response.data.user || response.data
   },
 
   logout: async (): Promise<void> => {
     await api.post("/auth/logout")
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token")
+    }
+  },
+}
+
+// ============================================================================
+// ORDER/CHECKOUT API
+// ============================================================================
+// This is called from app/checkout/page.tsx
+// Expected endpoint:
+// - POST /orders/checkout - Create new order
+// ============================================================================
+export const orderAPI = {
+  createOrder: async (orderData: {
+    items: Array<{ productId: string; size: string; quantity: number; price: number }>
+    customer: {
+      fullName: string
+      email: string
+      phone: string
+      address: string
+      city: string
+      state: string
+    }
+    paymentMethod: "paystack" | "flutterwave"
+    subtotal: number
+    shipping: number
+    total: number
+  }) => {
+    const response = await api.post("/orders/checkout", orderData)
+    return response.data
+  },
+}
+
+// ============================================================================
+// NEWSLETTER API
+// ============================================================================
+// This is called from app/page.tsx (newsletter form)
+// Expected endpoint:
+// - POST /newsletter/subscribe - Subscribe to newsletter
+// ============================================================================
+export const newsletterAPI = {
+  subscribe: async (email: string): Promise<void> => {
+    await api.post("/newsletter/subscribe", { email })
   },
 }
 

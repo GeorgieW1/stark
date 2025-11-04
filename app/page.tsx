@@ -6,7 +6,7 @@ import { ArrowRight, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product-card"
 import { useEffect, useState } from "react"
-import { productAPI } from "@/services/api"
+import { productAPI, newsletterAPI } from "@/services/api"
 import type { Product } from "@/lib/types"
 
 export default function HomePage() {
@@ -469,15 +469,19 @@ export default function HomePage() {
             Get early access to new drops, exclusive offers, and behind-the-scenes content from STARK.
           </p>
           <form 
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault()
               const formData = new FormData(e.currentTarget)
               const email = formData.get("email") as string
-              // TODO: Integrate with email service (e.g., Mailchimp, ConvertKit)
-              console.log("Newsletter subscription:", email)
-              // Show success message
-              alert("Thank you for subscribing! Check your email for confirmation.")
-              e.currentTarget.reset()
+              
+              try {
+                await newsletterAPI.subscribe(email)
+                alert("Thank you for subscribing! Check your email for confirmation.")
+                e.currentTarget.reset()
+              } catch (error) {
+                console.error("Newsletter subscription error:", error)
+                alert("Failed to subscribe. Please try again.")
+              }
             }}
             className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
           >

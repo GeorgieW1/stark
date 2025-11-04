@@ -12,8 +12,10 @@ import type { Product } from "@/lib/types"
 export default function HomePage() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
     const loadProducts = async () => {
       try {
         const products = await productAPI.getAll()
@@ -34,49 +36,78 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            preload="auto"
-          >
-            <source
-              src="/SaveClip.App_AQO3khYlZYrEo1FxAjU6WMtkXPBd9940UYyIu7drSlz1eCkpwtDQik2_WKQtxP2H6YuMT6wX2EOlgHS5Lu9T7m86ljmrUenlU5_uvVA.mp4"
-              type="video/mp4"
-            />
-          </video>
+          {/* Fallback Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/stark-hero-lifestyle.jpg')",
+            }}
+          />
+          {/* Video */}
+          {isMounted && (
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              preload="auto"
+              onError={(e) => {
+                console.error("Video failed to load:", e)
+                e.currentTarget.style.display = "none"
+              }}
+            >
+              <source
+                src="/SaveClip.App_AQO3khYlZYrEo1FxAjU6WMtkXPBd9940UYyIu7drSlz1eCkpwtDQik2_WKQtxP2H6YuMT6wX2EOlgHS5Lu9T7m86ljmrUenlU5_uvVA.mp4"
+                type="video/mp4"
+              />
+            </video>
+          )}
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90" />
           {/* Animated gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#f4b5c1]/10 via-transparent to-[#f4b5c1]/10 animate-pulse" />
         </div>
 
-        {/* Floating Elements */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-[#f4b5c1]/30 rounded-full"
-              initial={{
-                x: `${Math.random() * 100}%`,
-                y: `${Math.random() * 100}%`,
-                opacity: 0.3,
-              }}
-              animate={{
-                y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`, `${Math.random() * 100}%`],
-                x: [`${Math.random() * 100}%`, `${Math.random() * 100}%`, `${Math.random() * 100}%`],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: Math.random() * 10 + 10,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "linear",
-              }}
-            />
-          ))}
-        </div>
+        {/* Floating Elements - Only render on client */}
+        {isMounted && (
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            {[...Array(6)].map((_, i) => {
+              // Use deterministic values based on index to avoid hydration mismatch
+              const positions = [
+                { x: 15, y: 20 },
+                { x: 65, y: 45 },
+                { x: 35, y: 70 },
+                { x: 80, y: 30 },
+                { x: 50, y: 85 },
+                { x: 90, y: 60 },
+              ]
+              const pos = positions[i] || { x: 50, y: 50 }
+              
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-[#f4b5c1]/30 rounded-full"
+                  initial={{
+                    x: `${pos.x}%`,
+                    y: `${pos.y}%`,
+                    opacity: 0.3,
+                  }}
+                  animate={{
+                    y: [`${pos.y}%`, `${(pos.y + 30) % 100}%`, `${pos.y}%`],
+                    x: [`${pos.x}%`, `${(pos.x + 20) % 100}%`, `${pos.x}%`],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{
+                    duration: 8 + i * 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "linear",
+                  }}
+                />
+              )
+            })}
+          </div>
+        )}
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

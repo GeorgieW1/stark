@@ -347,6 +347,32 @@ api.interceptors.response.use(
 
 ---
 
+## 📚 API Documentation
+
+### **Who Should Send What?**
+
+**Frontend Developer (You) has already created:**
+- ✅ `API_INTEGRATION_GUIDE.md` - This file with endpoint specifications
+- ✅ `services/api.ts` - Frontend code showing expected request/response formats
+- ✅ TypeScript types in `lib/types.ts` - Data structures expected
+
+**Backend Developer Should Provide:**
+- 📄 **Their own API documentation** (if different from this guide)
+- 📄 **Actual endpoint URLs** (may differ from what's expected)
+- 📄 **Authentication method** (if using JWT tokens, API keys, etc.)
+- 📄 **Response format examples** (actual JSON responses from their API)
+- 📄 **Error codes and messages** (how errors are structured)
+- 📄 **Rate limiting** (if applicable)
+- 📄 **CORS configuration** (to allow frontend to call backend)
+
+**Recommendation:**
+1. Share `API_INTEGRATION_GUIDE.md` with your backend developer
+2. Ask them to review it and confirm if their endpoints match
+3. If different, ask them to provide their API documentation
+4. Update `services/api.ts` based on their actual API structure
+
+---
+
 ## 🆘 Need Help?
 
 If backend developer needs clarification:

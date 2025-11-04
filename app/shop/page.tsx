@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Filter } from "lucide-react"
+import { Filter, Search, X } from "lucide-react"
 import { ProductCard } from "@/components/product-card"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { productAPI } from "@/services/api"
 import type { Product } from "@/lib/types"
 
@@ -14,6 +15,7 @@ export default function ShopPage() {
   const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState<string>("all")
   const [showFilters, setShowFilters] = useState(false)
+  const [searchQuery, setSearchQuery] = useState<string>("")
 
   const categories = [
     { id: "all", label: "All" },
@@ -39,12 +41,26 @@ export default function ShopPage() {
   }, [])
 
   useEffect(() => {
-    if (activeCategory === "all") {
-      setFilteredProducts(products)
-    } else {
-      setFilteredProducts(products.filter((p) => p.category === activeCategory))
+    let filtered = products
+
+    // Filter by category
+    if (activeCategory !== "all") {
+      filtered = filtered.filter((p) => p.category === activeCategory)
     }
-  }, [activeCategory, products])
+
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim()
+      filtered = filtered.filter(
+        (p) =>
+          p.name.toLowerCase().includes(query) ||
+          p.description.toLowerCase().includes(query) ||
+          p.category.toLowerCase().includes(query)
+      )
+    }
+
+    setFilteredProducts(filtered)
+  }, [activeCategory, products, searchQuery])
 
   return (
     <div className="bg-black min-h-screen">
@@ -65,9 +81,31 @@ export default function ShopPage() {
         </div>
       </section>
 
-      {/* Filters */}
+      {/* Search and Filters */}
       <section className="sticky top-16 z-40 bg-black/95 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          {/* Search Bar */}
+          <div className="mb-6">
+            <div className="relative max-w-md mx-auto">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-white/40" />
+              <Input
+                type="text"
+                placeholder="Search for clothes, hoodies, tracksuits..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-10 py-6 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:bg-white/15 focus:border-[#f4b5c1] text-lg"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              )}
+            </div>
+          </div>
+
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Button
@@ -102,6 +140,7 @@ export default function ShopPage() {
 
             <p className="text-white/60 text-sm">
               {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"}
+              {searchQuery && ` matching "${searchQuery}"`}
             </p>
           </div>
 
@@ -153,7 +192,23 @@ export default function ShopPage() {
             </div>
           ) : filteredProducts.length === 0 ? (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-20">
-              <p className="text-white/60 text-lg">No products found in this category.</p>
+              <p className="text-white/60 text-lg mb-4">
+                {searchQuery
+                  ? `No products found matching "${searchQuery}"`
+                  : "No products found in this category."}
+              </p>
+              {searchQuery && (
+                <Button
+                  onClick={() => {
+                    setSearchQuery("")
+                    setActiveCategory("all")
+                  }}
+                  variant="outline"
+                  className="border-white/20 text-white hover:bg-white/10"
+                >
+                  Clear search
+                </Button>
+              )}
             </motion.div>
           ) : (
             <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

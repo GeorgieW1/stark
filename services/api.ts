@@ -172,6 +172,7 @@ export const newsletterAPI = {
 }
 
 const MOCK_PRODUCTS: Product[] = [
+  // Unisex Products (Featured)
   {
     id: "1",
     name: "STARK Pink Embroidered Hoodie",
@@ -231,6 +232,99 @@ const MOCK_PRODUCTS: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     inStock: true,
   },
+  // Men's Products
+  {
+    id: "9",
+    name: "STARK Men's Black Bomber Jacket",
+    price: 55000,
+    description:
+      "Stylish bomber jacket with STARK patches. Perfect for streetwear enthusiasts. Premium quality with modern design.",
+    category: "men",
+    images: ["/black-bomber-jacket-with-patches-streetwear.jpg", "/bomber-jacket-back-embroidery.jpg"],
+    sizes: ["M", "L", "XL", "XXL"],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: "10",
+    name: "STARK Men's Black Cargo Pants",
+    price: 40000,
+    description:
+      "Utility cargo pants with multiple pockets. Comfortable fit for everyday wear. Perfect for street style.",
+    category: "men",
+    images: ["/black-cargo-pants-streetwear-utility.jpg", "/cargo-pants-detail-pockets.jpg"],
+    sizes: ["S", "M", "L", "XL"],
+    inStock: true,
+  },
+  {
+    id: "11",
+    name: "STARK Men's Oversized T-Shirt",
+    price: 28000,
+    description:
+      "Bold graphic t-shirt with STARK branding. Oversized fit for modern streetwear look.",
+    category: "men",
+    images: ["/white-oversized-tshirt-with-bold-graphic-streetwea.jpg", "/oversized-tshirt-side-view.jpg"],
+    sizes: ["M", "L", "XL", "XXL"],
+    inStock: true,
+  },
+  {
+    id: "12",
+    name: "STARK Men's Black Premium Hoodie",
+    price: 48000,
+    description:
+      "Premium hoodie with Lagos skyline embroidery. Unique design celebrating Nigerian culture.",
+    category: "men",
+    images: ["/black-premium-hoodie-with-lagos-skyline-embroidery.jpg", "/black-hoodie-back-view-streetwear.jpg"],
+    sizes: ["M", "L", "XL", "XXL"],
+    inStock: true,
+  },
+  // Women's Products
+  {
+    id: "13",
+    name: "STARK Women's Pink Crop Top",
+    price: 25000,
+    description:
+      "Minimalist pink crop top with STARK branding. Perfect for layering or wearing solo. Streetwear meets fashion.",
+    category: "women",
+    images: ["/pink-crop-top-minimalist-streetwear.jpg", "/crop-top-lifestyle-photo.jpg"],
+    sizes: ["S", "M", "L"],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: "14",
+    name: "STARK Women's Black Hoodie",
+    price: 45000,
+    description:
+      "Classic black hoodie designed for women. Comfortable fit with STARK embroidery. Versatile wardrobe essential.",
+    category: "women",
+    images: ["/black-hoodie-lifestyle.jpg", "/black-embroidered-stark-hoodie.jpg"],
+    sizes: ["S", "M", "L", "XL"],
+    inStock: true,
+  },
+  {
+    id: "15",
+    name: "STARK Women's Grey Hoodie",
+    price: 45000,
+    description:
+      "Elegant grey hoodie with pink accents. Perfect for everyday wear with streetwear edge.",
+    category: "women",
+    images: ["/grey-stark-hoodie-pink-accents.jpg", "/grey-hoodie-lifestyle.jpg"],
+    sizes: ["S", "M", "L", "XL"],
+    inStock: true,
+  },
+  {
+    id: "16",
+    name: "STARK Women's Tracksuit Set",
+    price: 68000,
+    description:
+      "Complete tracksuit set for women. Premium quality with comfortable fit. Perfect for active lifestyle.",
+    category: "women",
+    images: ["/black-tracksuit-set-premium-streetwear.jpg", "/tracksuit-lifestyle-urban.jpg"],
+    sizes: ["S", "M", "L"],
+    inStock: true,
+  },
+  // Additional Unisex Products
   {
     id: "6",
     name: "STARK Grey Embroidered Hoodie",

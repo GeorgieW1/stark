@@ -13,6 +13,8 @@ export default function HomePage() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [isMounted, setIsMounted] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
+  const [videoError, setVideoError] = useState(false)
 
   useEffect(() => {
     setIsMounted(true)
@@ -35,14 +37,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Video Background */}
-        <div className="absolute inset-0 z-0">
-          {/* Fallback Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/stark-hero-lifestyle.jpg')",
-            }}
-          />
+        <div className="absolute inset-0 z-0 bg-black">
           {/* Video */}
           {isMounted && (
             <video
@@ -52,9 +47,16 @@ export default function HomePage() {
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
               preload="auto"
+              onCanPlay={() => {
+                setVideoReady(true)
+              }}
+              onLoadedData={() => {
+                setVideoReady(true)
+              }}
               onError={(e) => {
                 console.error("Video failed to load:", e)
                 e.currentTarget.style.display = "none"
+                setVideoError(true)
               }}
             >
               <source
@@ -62,6 +64,15 @@ export default function HomePage() {
                 type="video/mp4"
               />
             </video>
+          )}
+          {/* Fallback Image - Only show if video fails to load */}
+          {isMounted && videoError && (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: "url('/stark-hero-lifestyle.jpg')",
+              }}
+            />
           )}
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90" />

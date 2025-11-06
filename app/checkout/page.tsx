@@ -282,17 +282,52 @@ export default function CheckoutPage() {
                 <h2 className="text-2xl font-bold text-foreground">Payment Method</h2>
 
                 <div className="space-y-4">
-                  <div className="flex items-center gap-4 p-4 rounded-lg border border-border bg-accent">
+                  <label
+                    htmlFor="verge-payment"
+                    className={`flex items-start gap-4 p-5 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+                      formData.paymentMethod === "verge"
+                        ? "border-[#f4b5c1] bg-[#f4b5c1]/5 shadow-md"
+                        : "border-border bg-background hover:border-foreground/20 hover:bg-card"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      id="verge-payment"
+                      name="paymentMethod"
+                      value="verge"
+                      checked={formData.paymentMethod === "verge"}
+                      onChange={handleChange}
+                      className="mt-1 h-4 w-4 text-[#f4b5c1] focus:ring-[#f4b5c1] focus:ring-2 cursor-pointer"
+                    />
                     <div className="flex-1">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-3 mb-2">
                         <CreditCard className="h-5 w-5 text-foreground" />
-                        <span className="text-foreground font-medium">Verge Payment</span>
+                        <span className="text-foreground font-semibold text-lg">Verge Payment</span>
+                        {formData.paymentMethod === "verge" && (
+                          <span className="ml-auto px-3 py-1 bg-[#f4b5c1] text-black text-xs font-bold rounded-full">
+                            Selected
+                          </span>
+                        )}
                       </div>
-                      <p className="text-foreground/60 text-sm mt-1">
-                        Pay securely via USSD, Card, NQR, or Bank Transfer - All payment channels available
+                      <p className="text-foreground/70 text-sm leading-relaxed">
+                        Pay securely via USSD, Card, NQR, or Bank Transfer. All payment channels available.
                       </p>
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        <span className="px-2 py-1 bg-background border border-border rounded text-xs text-foreground/70">
+                          USSD
+                        </span>
+                        <span className="px-2 py-1 bg-background border border-border rounded text-xs text-foreground/70">
+                          Card
+                        </span>
+                        <span className="px-2 py-1 bg-background border border-border rounded text-xs text-foreground/70">
+                          NQR
+                        </span>
+                        <span className="px-2 py-1 bg-background border border-border rounded text-xs text-foreground/70">
+                          Bank Transfer
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  </label>
                 </div>
               </motion.div>
             </div>

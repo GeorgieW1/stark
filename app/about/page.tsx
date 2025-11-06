@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function AboutPage() {
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-background min-h-screen">
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -13,10 +13,10 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center space-y-6 mb-16"
           >
-            <h1 className="text-5xl sm:text-6xl font-bold text-white">
+            <h1 className="text-5xl sm:text-6xl font-bold text-foreground">
               About <span className="text-[#f4b5c1]">STARK</span>
             </h1>
-            <p className="text-white/70 text-xl">Where culture meets fashion</p>
+            <p className="text-foreground/70 text-xl">Where culture meets fashion</p>
           </motion.div>
 
           <motion.div
@@ -25,7 +25,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="prose prose-invert max-w-none space-y-8"
           >
-            <div className="text-white/80 text-lg leading-relaxed space-y-6">
+            <div className="text-foreground/80 text-lg leading-relaxed space-y-6">
               <p>
                 STARK was born from a simple vision: to create premium streetwear that celebrates Nigerian culture
                 and creativity while competing on the global stage.

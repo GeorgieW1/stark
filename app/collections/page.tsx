@@ -31,9 +31,9 @@ export default function CollectionsPage() {
   ]
 
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-background min-h-screen">
       {/* Header */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 border-b border-border">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -41,8 +41,8 @@ export default function CollectionsPage() {
             transition={{ duration: 0.6 }}
             className="text-center space-y-4"
           >
-            <h1 className="text-5xl sm:text-6xl font-bold text-white">Collections</h1>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+            <h1 className="text-5xl sm:text-6xl font-bold text-foreground">Collections</h1>
+            <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
               Curated collections that tell the story of Lagos through fashion
             </p>
           </motion.div>
@@ -67,7 +67,7 @@ export default function CollectionsPage() {
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                     style={{ backgroundImage: `url(${collection.image})` }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 dark:from-black via-black/50 dark:via-black/50 to-transparent" />
 
                   <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12">
                     <motion.div

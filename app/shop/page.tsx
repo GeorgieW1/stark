@@ -63,9 +63,9 @@ export default function ShopPage() {
   }, [activeCategory, products, searchQuery])
 
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-background min-h-screen">
       {/* Header */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 border-b border-border">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -73,8 +73,8 @@ export default function ShopPage() {
             transition={{ duration: 0.6 }}
             className="text-center space-y-4"
           >
-            <h1 className="text-5xl sm:text-6xl font-bold text-white">Shop All</h1>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+            <h1 className="text-5xl sm:text-6xl font-bold text-foreground">Shop All</h1>
+            <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
               Discover our full collection of premium Nigerian streetwear. Every piece crafted with purpose and pride.
             </p>
           </motion.div>
@@ -82,23 +82,23 @@ export default function ShopPage() {
       </section>
 
       {/* Search and Filters */}
-      <section className="sticky top-16 z-40 bg-black/95 backdrop-blur-sm border-b border-white/10">
+      <section className="sticky top-16 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Search Bar */}
           <div className="mb-6">
             <div className="relative max-w-md mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-white/40" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-foreground/40" />
               <Input
                 type="text"
                 placeholder="Search for clothes, hoodies, tracksuits..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-10 py-6 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:bg-white/15 focus:border-[#f4b5c1] text-lg"
+                className="w-full pl-12 pr-10 py-6 bg-card border-border text-foreground placeholder:text-foreground/50 focus:bg-card focus:border-[#f4b5c1] text-lg"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-foreground/60 hover:text-foreground transition-colors"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -112,7 +112,7 @@ export default function ShopPage() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowFilters(!showFilters)}
-                className="md:hidden text-white hover:bg-white/10"
+                className="md:hidden text-foreground hover:bg-accent"
               >
                 <Filter className="h-4 w-4 mr-2" />
                 Filters
@@ -127,7 +127,7 @@ export default function ShopPage() {
                     className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
                       activeCategory === category.id
                         ? "bg-[#f4b5c1] text-black"
-                        : "bg-white/10 text-white hover:bg-white/20"
+                        : "bg-card text-foreground hover:bg-accent border border-border"
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -138,7 +138,7 @@ export default function ShopPage() {
               </div>
             </div>
 
-            <p className="text-white/60 text-sm">
+            <p className="text-foreground/60 text-sm">
               {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"}
               {searchQuery && ` matching "${searchQuery}"`}
             </p>
@@ -163,7 +163,7 @@ export default function ShopPage() {
                     className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
                       activeCategory === category.id
                         ? "bg-[#f4b5c1] text-black"
-                        : "bg-white/10 text-white hover:bg-white/20"
+                        : "bg-card text-foreground hover:bg-accent border border-border"
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -184,15 +184,15 @@ export default function ShopPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="aspect-square bg-neutral-900 rounded-lg mb-4" />
-                  <div className="h-4 bg-neutral-900 rounded mb-2" />
-                  <div className="h-4 bg-neutral-900 rounded w-2/3" />
+                  <div className="aspect-square bg-card rounded-lg mb-4" />
+                  <div className="h-4 bg-card rounded mb-2" />
+                  <div className="h-4 bg-card rounded w-2/3" />
                 </div>
               ))}
             </div>
           ) : filteredProducts.length === 0 ? (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-20">
-              <p className="text-white/60 text-lg mb-4">
+              <p className="text-foreground/60 text-lg mb-4">
                 {searchQuery
                   ? `No products found matching "${searchQuery}"`
                   : "No products found in this category."}
@@ -204,7 +204,7 @@ export default function ShopPage() {
                     setActiveCategory("all")
                   }}
                   variant="outline"
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-border text-foreground hover:bg-accent"
                 >
                   Clear search
                 </Button>

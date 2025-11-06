@@ -33,11 +33,11 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="bg-black">
+    <div className="bg-background">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Video Background */}
-        <div className="absolute inset-0 z-0 bg-black">
+        <div className="absolute inset-0 z-0 bg-black dark:bg-black">
           {/* Video */}
           {isMounted && (
             <video
@@ -271,19 +271,19 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Featured Pieces</h2>
-            <p className="text-white/60 text-lg">Handpicked essentials from our latest collection</p>
-          </motion.div>
+        {/* Featured Products */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Featured Pieces</h2>
+              <p className="text-foreground/60 text-lg">Handpicked essentials from our latest collection</p>
+            </motion.div>
 
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -332,19 +332,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Video Showcase */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Behind the Brand</h2>
-            <p className="text-white/60 text-lg">Experience STARK through our lens</p>
-          </motion.div>
+        {/* Video Showcase */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Behind the Brand</h2>
+              <p className="text-foreground/60 text-lg">Experience STARK through our lens</p>
+            </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Video 1 */}
@@ -404,46 +404,46 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Brand Story */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="aspect-square relative rounded-lg overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: "url('/SaveClip.App_573165403_18077691014155656_5474932771996079243_n.jpg')",
-                  }}
-                />
-              </div>
-            </motion.div>
+        {/* Brand Story */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-card">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="aspect-square relative rounded-lg overflow-hidden">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                      backgroundImage: "url('/SaveClip.App_573165403_18077691014155656_5474932771996079243_n.jpg')",
+                    }}
+                  />
+                </div>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6"
-            >
-              <h2 className="text-4xl sm:text-5xl font-bold text-white">
-                STARK:
-                <br />
-                <span className="text-[#f4b5c1]">Lagos to the World</span>
-              </h2>
-              <p className="text-white/70 text-lg leading-relaxed">
-                STARK is more than just a clothing brand. We're a movement celebrating Nigerian style, confidence, and
-                unisex fashion. Every piece is designed with intention, crafted with quality, and delivered nationwide.
-              </p>
-              <p className="text-white/70 text-lg leading-relaxed">
-                From our base in Lagos, we bring you premium streetwear that works for everyone. Best travel outfits.
-                Unisex boutiques. Fixed prices. No refunds. Just pure, authentic STARK.
-              </p>
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="space-y-6"
+              >
+                <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
+                  STARK:
+                  <br />
+                  <span className="text-[#f4b5c1]">Lagos to the World</span>
+                </h2>
+                <p className="text-foreground/70 text-lg leading-relaxed">
+                  STARK is more than just a clothing brand. We're a movement celebrating Nigerian style, confidence, and
+                  unisex fashion. Every piece is designed with intention, crafted with quality, and delivered nationwide.
+                </p>
+                <p className="text-foreground/70 text-lg leading-relaxed">
+                  From our base in Lagos, we bring you premium streetwear that works for everyone. Best travel outfits.
+                  Unisex boutiques. Fixed prices. No refunds. Just pure, authentic STARK.
+                </p>
               <Link href="/about">
                 <Button size="lg" className="bg-[#f4b5c1] text-black hover:bg-[#f4b5c1]/90">
                   Our Story
@@ -455,49 +455,49 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center space-y-8"
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">Stay in the Loop</h2>
-          <p className="text-white/70 text-lg">
-            Get early access to new drops, exclusive offers, and behind-the-scenes content from STARK.
-          </p>
-          <form 
-            onSubmit={async (e) => {
-              e.preventDefault()
-              const formData = new FormData(e.currentTarget)
-              const email = formData.get("email") as string
-              
-              try {
-                await newsletterAPI.subscribe(email)
-                alert("Thank you for subscribing! Check your email for confirmation.")
-                e.currentTarget.reset()
-              } catch (error) {
-                console.error("Newsletter subscription error:", error)
-                alert("Failed to subscribe. Please try again.")
-              }
-            }}
-            className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+        {/* Newsletter */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center space-y-8"
           >
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              required
-              className="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#f4b5c1]"
-            />
-            <Button type="submit" size="lg" className="bg-[#f4b5c1] text-black hover:bg-[#f4b5c1]/90 px-8">
-              Subscribe
-            </Button>
-          </form>
-        </motion.div>
-      </section>
+            <h2 className="text-4xl sm:text-5xl font-bold text-foreground">Stay in the Loop</h2>
+            <p className="text-foreground/70 text-lg">
+              Get early access to new drops, exclusive offers, and behind-the-scenes content from STARK.
+            </p>
+            <form 
+              onSubmit={async (e) => {
+                e.preventDefault()
+                const formData = new FormData(e.currentTarget)
+                const email = formData.get("email") as string
+                
+                try {
+                  await newsletterAPI.subscribe(email)
+                  alert("Thank you for subscribing! Check your email for confirmation.")
+                  e.currentTarget.reset()
+                } catch (error) {
+                  console.error("Newsletter subscription error:", error)
+                  alert("Failed to subscribe. Please try again.")
+                }
+              }}
+              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+            >
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+                className="flex-1 px-6 py-4 bg-card border border-border rounded-lg text-foreground placeholder:text-foreground/50 focus:outline-none focus:ring-2 focus:ring-[#f4b5c1]"
+              />
+              <Button type="submit" size="lg" className="bg-[#f4b5c1] text-black hover:bg-[#f4b5c1]/90 px-8">
+                Subscribe
+              </Button>
+            </form>
+          </motion.div>
+        </section>
     </div>
   )
 }

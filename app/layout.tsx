@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { CartProvider } from "@/context/cart-context";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Analytics } from "@vercel/analytics/react";
@@ -77,13 +78,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={outfit.className}>
-        <CartProvider>
-          <Navbar />
-          <main className="min-h-screen pt-16">{children}</main>
-          <Footer />
-        </CartProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange={false}
+        >
+          <CartProvider>
+            <Navbar />
+            <main className="min-h-screen pt-16">{children}</main>
+            <Footer />
+          </CartProvider>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

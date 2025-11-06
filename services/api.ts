@@ -192,6 +192,50 @@ export const newsletterAPI = {
   },
 }
 
+// ============================================================================
+// REVIEW API
+// ============================================================================
+// Expected endpoints:
+// - GET /products/:id/reviews - Get reviews for a product
+// - POST /products/:id/reviews - Create a new review
+// - PUT /reviews/:id - Update a review
+// - DELETE /reviews/:id - Delete a review
+// ============================================================================
+import type { Review } from "@/lib/types"
+
+export const reviewAPI = {
+  // Get all reviews for a product
+  getByProductId: async (productId: string): Promise<Review[]> => {
+    const response = await api.get(`/products/${productId}/reviews`)
+    return response.data
+  },
+
+  // Create a new review
+  create: async (productId: string, reviewData: {
+    rating: number
+    comment: string
+    userName: string
+    userEmail?: string
+  }): Promise<Review> => {
+    const response = await api.post(`/products/${productId}/reviews`, reviewData)
+    return response.data
+  },
+
+  // Update a review (if user owns it)
+  update: async (reviewId: string, reviewData: {
+    rating?: number
+    comment?: string
+  }): Promise<Review> => {
+    const response = await api.put(`/reviews/${reviewId}`, reviewData)
+    return response.data
+  },
+
+  // Delete a review (if user owns it)
+  delete: async (reviewId: string): Promise<void> => {
+    await api.delete(`/reviews/${reviewId}`)
+  },
+}
+
 const MOCK_PRODUCTS: Product[] = [
   // Unisex Products (Featured)
   {

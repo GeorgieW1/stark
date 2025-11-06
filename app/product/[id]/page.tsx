@@ -8,9 +8,11 @@ import { useParams, useRouter } from "next/navigation"
 import { ShoppingBag, Check, ArrowLeft, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product-card"
+import { ReviewList } from "@/components/review-list"
+import { ReviewForm } from "@/components/review-form"
 import { useCart } from "@/context/cart-context"
-import { productAPI } from "@/services/api"
-import type { Product } from "@/lib/types"
+import { productAPI, reviewAPI } from "@/services/api"
+import type { Product, Review } from "@/lib/types"
 
 export default function ProductPage() {
   const params = useParams()
@@ -19,7 +21,9 @@ export default function ProductPage() {
 
   const [product, setProduct] = useState<Product | null>(null)
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([])
+  const [reviews, setReviews] = useState<Review[]>([])
   const [loading, setLoading] = useState(true)
+  const [reviewsLoading, setReviewsLoading] = useState(true)
   const [selectedSize, setSelectedSize] = useState<string>("")
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
@@ -43,8 +47,32 @@ export default function ProductPage() {
       }
     }
 
+    const loadReviews = async () => {
+      try {
+        const data = await reviewAPI.getByProductId(params.id as string)
+        setReviews(data)
+      } catch (error) {
+        console.error("[v0] Error loading reviews:", error)
+        // If endpoint doesn't exist yet, just use empty array
+        setReviews([])
+      } finally {
+        setReviewsLoading(false)
+      }
+    }
+
     loadProduct()
+    loadReviews()
   }, [params.id])
+
+  const handleReviewSubmitted = (newReview: Review) => {
+    setReviews((prev) => [newReview, ...prev])
+  }
+
+  // Calculate average rating and total reviews
+  const averageRating = reviews.length > 0
+    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+    : undefined
+  const totalReviews = reviews.length
 
   const handleAddToCart = () => {
     if (product && selectedSize) {
@@ -253,6 +281,48 @@ export default function ProductPage() {
                 </span>
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="border-t border-border py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h2 className="text-4xl font-bold text-foreground mb-4">Customer Reviews</h2>
+            <p className="text-foreground/60">See what our customers are saying about this product</p>
+          </motion.div>
+
+          {/* Review Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <ReviewForm productId={product.id} onReviewSubmitted={handleReviewSubmitted} />
+          </motion.div>
+
+          {/* Reviews List */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {reviewsLoading ? (
+              <div className="text-center py-12">
+                <div className="animate-pulse text-foreground/60">Loading reviews...</div>
+              </div>
+            ) : (
+              <ReviewList reviews={reviews} averageRating={averageRating} totalReviews={totalReviews} />
+            )}
           </motion.div>
         </div>
       </section>

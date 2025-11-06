@@ -31,3 +31,22 @@ export interface CheckoutFormData {
   state: string
   paymentMethod: "verge"
 }
+
+export interface Review {
+  id: string
+  productId: string
+  userId: string
+  userName: string
+  userEmail?: string
+  rating: number // 1-5 stars
+  comment: string
+  createdAt: string
+  updatedAt?: string
+  verifiedPurchase?: boolean // Whether user actually purchased the product
+}
+
+export interface ProductWithReviews extends Product {
+  reviews?: Review[]
+  averageRating?: number
+  totalReviews?: number
+}

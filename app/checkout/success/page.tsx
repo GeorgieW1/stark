@@ -1,11 +1,23 @@
 "use client"
 
+import { useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { CheckCircle, ArrowRight, Package } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function CheckoutSuccessPage() {
+  const searchParams = useSearchParams()
+  const [orderId, setOrderId] = useState<string>("")
+
+  useEffect(() => {
+    const id = searchParams.get("orderId")
+    if (id) {
+      setOrderId(id)
+    }
+  }, [searchParams])
+
   return (
     <div className="bg-black min-h-screen flex items-center justify-center">
       <motion.div
@@ -48,7 +60,9 @@ export default function CheckoutSuccessPage() {
         >
           <div className="flex items-center justify-center gap-3 text-[#f4b5c1]">
             <Package className="h-6 w-6" />
-            <span className="font-semibold">Order #LW-{Math.random().toString(36).substr(2, 9).toUpperCase()}</span>
+            <span className="font-semibold">
+              {orderId ? `Order #${orderId}` : `Order #STARK-${Math.random().toString(36).substr(2, 9).toUpperCase()}`}
+            </span>
           </div>
 
           <div className="space-y-3 text-white/60">
@@ -85,9 +99,9 @@ export default function CheckoutSuccessPage() {
           className="pt-8 border-t border-white/10 space-y-3"
         >
           <p className="text-white/60 text-sm">Need help with your order?</p>
-          <Link href="/contact" className="text-[#f4b5c1] hover:underline text-sm font-medium">
+          <a href="mailto:support@stark.com" className="text-[#f4b5c1] hover:underline text-sm font-medium">
             Contact our support team
-          </Link>
+          </a>
         </motion.div>
       </motion.div>
     </div>

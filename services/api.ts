@@ -148,7 +148,7 @@ export const orderAPI = {
       city: string
       state: string
     }
-    paymentMethod: "paystack" | "flutterwave"
+    paymentMethod: "paystack" | "flutterwave" | "verge"
     subtotal: number
     shipping: number
     total: number

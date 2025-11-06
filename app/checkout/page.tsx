@@ -79,7 +79,16 @@ export default function CheckoutPage() {
 
       // If payment gateway URL is provided, redirect to payment
       if (response.paymentUrl) {
+        // For Verge, redirect to payment page
+        // Verge will redirect back to /checkout/verge-callback with Id and Status
         window.location.href = response.paymentUrl
+        return
+      }
+
+      // If order ID is returned (for non-redirect payments), go to success
+      if (response.orderId) {
+        clearCart()
+        router.push(`/checkout/success?orderId=${response.orderId}`)
         return
       }
 
@@ -294,6 +303,24 @@ export default function CheckoutPage() {
                         <span className="text-white font-medium">Flutterwave</span>
                       </div>
                       <p className="text-white/60 text-sm mt-1">Multiple payment options available</p>
+                    </div>
+                  </label>
+
+                  <label className="flex items-center gap-4 p-4 rounded-lg border border-white/20 cursor-pointer hover:bg-white/5 transition-colors">
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="verge"
+                      checked={formData.paymentMethod === "verge"}
+                      onChange={handleChange}
+                      className="w-4 h-4 text-[#f4b5c1]"
+                    />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <CreditCard className="h-5 w-5 text-white" />
+                        <span className="text-white font-medium">Verge Payment</span>
+                      </div>
+                      <p className="text-white/60 text-sm mt-1">USSD, Card, NQR, or Bank Transfer - All payment channels</p>
                     </div>
                   </label>
                 </div>

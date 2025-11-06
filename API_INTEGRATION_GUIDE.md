@@ -140,9 +140,9 @@ export const authAPI = {
 
 ### **4. Checkout/Order API**
 
-**File:** `app/checkout/page.tsx` (Line 57-73)
+**File:** `app/checkout/page.tsx` (Line 57-98)
 
-**Current Status:** Using mock/simulated checkout - needs real API
+**Current Status:** ✅ Ready - Backend needs to implement endpoint
 
 #### **Required Endpoint:**
 
@@ -171,17 +171,17 @@ const handleSubmit = async (e: React.FormEvent) => {
         city: formData.city,
         state: formData.state,
       },
-      paymentMethod: formData.paymentMethod, // "paystack" or "flutterwave"
+      paymentMethod: formData.paymentMethod, // "paystack", "flutterwave", or "verge"
       subtotal: totalPrice,
       shipping: shippingFee,
       total: finalTotal,
     })
 
-    // If payment gateway URL provided
+    // If payment gateway URL provided (for Paystack, Flutterwave, or Verge)
     if (response.data.paymentUrl) {
       window.location.href = response.data.paymentUrl
-    } else {
-      // If order created successfully
+    } else if (response.data.orderId) {
+      // If order created successfully without redirect
       clearCart()
       router.push(`/checkout/success?orderId=${response.data.orderId}`)
     }
@@ -225,11 +225,19 @@ const handleSubmit = async (e: React.FormEvent) => {
 
 ```json
 {
-  "orderId": "string",
-  "paymentUrl": "string", // Optional - if redirecting to payment gateway
+  "orderId": "string", // Required - Backend generates this
+  "paymentUrl": "string", // Required for Paystack/Flutterwave/Verge - URL to redirect user to payment
   "status": "pending" | "processing" | "completed"
 }
 ```
+
+**For Verge Payment:**
+- Backend should generate order ID
+- Backend calls Verge InvokePayment API
+- Backend returns `payPageLink` from Verge as `paymentUrl`
+- Frontend redirects user to Verge payment page
+- Verge redirects back to `/checkout/verge-callback?Id={transactionId}&Status={status}`
+- Frontend handles success/failure on callback page
 
 ---
 
@@ -315,8 +323,58 @@ api.interceptors.response.use(
 | `/auth/signup` | POST | `services/api.ts` | ✅ Ready |
 | `/auth/login` | POST | `services/api.ts` | ✅ Ready |
 | `/auth/logout` | POST | `services/api.ts` | ✅ Ready |
-| `/orders/checkout` | POST | `app/checkout/page.tsx` | ⚠️ Needs integration |
+| `/orders/checkout` | POST | `app/checkout/page.tsx` | ✅ Ready - Backend needs to implement |
+| `/checkout/verge-callback` | GET | `app/checkout/verge-callback/page.tsx` | ✅ Ready - Handles Verge redirect |
 | `/newsletter/subscribe` | POST | `app/page.tsx` | ⚠️ Needs integration |
+
+---
+
+## 💳 Verge Payment Gateway Integration
+
+### **Frontend Implementation Status:** ✅ Complete
+
+**What Frontend Does:**
+1. ✅ Shows Verge as payment option in checkout
+2. ✅ Sends order data to backend with `paymentMethod: "verge"`
+3. ✅ Receives `paymentUrl` from backend
+4. ✅ Redirects user to Verge payment page
+5. ✅ Handles Verge redirect back to `/checkout/verge-callback`
+6. ✅ Shows success/failure based on Verge response
+
+**What Backend Needs to Do:**
+1. ⚠️ Receive order data from frontend
+2. ⚠️ Generate unique order ID (TraceId for Verge)
+3. ⚠️ Call Verge Authentication API to get token & key
+4. ⚠️ Generate signature: `Sha256(MerchantId + TraceId + TimeStamp + Key)`
+5. ⚠️ Call Verge InvokePayment API with order details
+6. ⚠️ Return `payPageLink` from Verge as `paymentUrl` to frontend
+7. ⚠️ Create callback endpoint to receive Verge webhook notifications
+8. ⚠️ Verify signature on callback
+9. ⚠️ Update order status based on payment result
+
+**Verge Callback URL Setup:**
+- Frontend callback page: `/checkout/verge-callback` (handles user redirect)
+- Backend webhook endpoint: Your backend URL (e.g., `https://your-api.com/api/webhooks/verge`)
+- Set `returnUrl` in Verge InvokePayment to: `https://your-site.com/checkout/verge-callback`
+- Set webhook URL in Verge merchant dashboard to your backend endpoint
+
+**Verge Payment Flow:**
+```
+1. User selects Verge → Frontend sends order to Backend
+2. Backend creates order → Generates order ID
+3. Backend calls Verge API → Gets payment URL
+4. Backend returns payment URL → Frontend redirects user
+5. User pays on Verge → Verge redirects to /checkout/verge-callback
+6. Verge sends webhook → Backend updates order status
+7. Frontend shows success/failure → Based on redirect params
+```
+
+**Important Notes for Backend Developer:**
+- Order ID from frontend should be used as `traceId` in Verge API
+- `returnUrl` should be: `https://your-domain.com/checkout/verge-callback`
+- Verge will redirect with query params: `?Id={transactionId}&Status={status}`
+- ResponseCode "00" = Success, anything else = Failed
+- Backend should verify payment via webhook (more reliable than redirect)
 
 ---
 

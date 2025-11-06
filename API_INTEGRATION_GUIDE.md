@@ -380,6 +380,47 @@ api.interceptors.response.use(
 
 ---
 
+## 🗄️ Database Relationships (Backend Schema)
+
+The backend developer has confirmed the following database relationships:
+
+| Relationship             | Type             | Status    |
+| ------------------------ | ---------------- | --------- |
+| **Category → Products**  | 1 → *            | ✅ Correct |
+| **User → Orders**        | 1 → *            | ✅ Correct |
+| **Order → OrderItems**   | 1 → *            | ✅ Correct |
+| **Product → OrderItems**  | 1 → *            | ✅ Correct |
+| **User → Cart**          | 1 → 1            | ✅ Correct |
+| **Cart → CartItems**     | 1 → *            | ✅ Correct |
+| **Product → CartItems**   | 1 → *            | ✅ Correct |
+| **Product → Reviews**    | 1 → *            | ✅ Correct |
+| **User → Reviews**       | 1 → *            | ✅ Correct |
+| **Order → Payment**      | 1 → 1            | ✅ Correct |
+| **User → Payments**      | 1 → * (optional) | ✅ Correct |
+
+### **Understanding the Relationships:**
+
+- **Category → Products (1 → *)**: One category can have many products
+- **User → Orders (1 → *)**: One user can have many orders
+- **Order → OrderItems (1 → *)**: One order contains many order items
+- **Product → OrderItems (1 → *)**: One product can appear in many order items
+- **User → Cart (1 → 1)**: Each user has exactly one cart
+- **Cart → CartItems (1 → *)**: One cart contains many cart items
+- **Product → CartItems (1 → *)**: One product can appear in many cart items (different users)
+- **Product → Reviews (1 → *)**: One product can have many reviews
+- **User → Reviews (1 → *)**: One user can write many reviews
+- **Order → Payment (1 → 1)**: Each order has exactly one payment record
+- **User → Payments (1 → *)**: One user can have many payments (optional, if tracking payment history)
+
+### **Frontend Implications:**
+
+- When fetching products, the backend may include category information
+- When creating an order, the backend will create OrderItems for each product
+- Cart is user-specific (if authentication is implemented)
+- Reviews can be fetched per product or per user
+
+---
+
 ## 🧪 Testing
 
 1. **Local Development:**

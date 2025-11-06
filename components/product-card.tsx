@@ -31,7 +31,7 @@ export function ProductCard({ product }: ProductCardProps) {
       className="group"
     >
       <Link href={`/product/${product.id}`}>
-        <div className="relative aspect-square overflow-hidden bg-neutral-900 rounded-lg mb-4">
+        <div className="relative aspect-square overflow-hidden bg-muted rounded-lg mb-4">
           <Image
             src={product.images[0] || "/placeholder.svg"}
             alt={product.name}
@@ -43,7 +43,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileHover={{ opacity: 1, y: 0 }}
-            className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute inset-0 bg-black/60 dark:bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
           >
             <Button onClick={handleQuickAdd} className="bg-white text-black hover:bg-[#f4b5c1] hover:text-black">
               <ShoppingBag className="h-4 w-4 mr-2" />
@@ -60,9 +60,9 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
 
         <div className="space-y-2">
-          <h3 className="font-semibold text-white group-hover:text-[#f4b5c1] transition-colors">{product.name}</h3>
-          <p className="text-white/60 text-sm">{product.category.toUpperCase()}</p>
-          <p className="text-white font-bold">₦{product.price.toLocaleString()}</p>
+          <h3 className="font-semibold text-foreground group-hover:text-[#f4b5c1] transition-colors">{product.name}</h3>
+          <p className="text-foreground/60 text-sm">{product.category.toUpperCase()}</p>
+          <p className="text-foreground font-bold">₦{product.price.toLocaleString()}</p>
         </div>
       </Link>
     </motion.div>

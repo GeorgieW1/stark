@@ -2,6 +2,8 @@
 
 This guide shows your C# backend developer exactly where to integrate API endpoints.
 
+> 📋 **See `FRONTEND_TO_BACKEND_DATA.md` for detailed explanation of what data is sent and received**
+
 ## 🚀 Quick Start
 
 ### 1. Set API Base URL

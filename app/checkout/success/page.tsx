@@ -19,7 +19,7 @@ export default function CheckoutSuccessPage() {
   }, [searchParams])
 
   return (
-    <div className="bg-black min-h-screen flex items-center justify-center">
+    <div className="bg-background min-h-screen flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -45,8 +45,8 @@ export default function CheckoutSuccessPage() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="space-y-4"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-white">Order Confirmed!</h1>
-          <p className="text-white/70 text-lg">
+          <h1 className="text-4xl sm:text-5xl font-bold text-foreground">Order Confirmed!</h1>
+          <p className="text-foreground/70 text-lg">
             Thank you for your purchase. We've received your order and will start processing it right away.
           </p>
         </motion.div>
@@ -56,7 +56,7 @@ export default function CheckoutSuccessPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="bg-neutral-950 rounded-lg p-8 border border-white/10 space-y-6"
+          className="bg-card rounded-lg p-8 border border-border space-y-6"
         >
           <div className="flex items-center justify-center gap-3 text-[#f4b5c1]">
             <Package className="h-6 w-6" />
@@ -65,7 +65,7 @@ export default function CheckoutSuccessPage() {
             </span>
           </div>
 
-          <div className="space-y-3 text-white/60">
+          <div className="space-y-3 text-foreground/60">
             <p>A confirmation email has been sent to your email address.</p>
             <p>You can track your order status from your account dashboard.</p>
           </div>
@@ -85,7 +85,7 @@ export default function CheckoutSuccessPage() {
             </Button>
           </Link>
           <Link href="/">
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 bg-transparent">
+            <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-accent bg-transparent">
               Back to Home
             </Button>
           </Link>
@@ -96,9 +96,9 @@ export default function CheckoutSuccessPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.6 }}
-          className="pt-8 border-t border-white/10 space-y-3"
+          className="pt-8 border-t border-border space-y-3"
         >
-          <p className="text-white/60 text-sm">Need help with your order?</p>
+          <p className="text-foreground/60 text-sm">Need help with your order?</p>
           <a href="mailto:support@stark.com" className="text-[#f4b5c1] hover:underline text-sm font-medium">
             Contact our support team
           </a>

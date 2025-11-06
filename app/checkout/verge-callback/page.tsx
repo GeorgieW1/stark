@@ -43,7 +43,7 @@ export default function VergeCallbackPage() {
   }, [searchParams])
 
   return (
-    <div className="bg-black min-h-screen flex items-center justify-center px-4">
+    <div className="bg-background min-h-screen flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -60,8 +60,8 @@ export default function VergeCallbackPage() {
               <Loader2 className="h-24 w-24 text-[#f4b5c1]" />
             </motion.div>
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl font-bold text-white">Processing Payment</h1>
-              <p className="text-white/70 text-lg">{message}</p>
+              <h1 className="text-4xl sm:text-5xl font-bold text-foreground">Processing Payment</h1>
+              <p className="text-foreground/70 text-lg">{message}</p>
             </div>
           </>
         )}
@@ -85,10 +85,10 @@ export default function VergeCallbackPage() {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="space-y-4"
             >
-              <h1 className="text-4xl sm:text-5xl font-bold text-white">Payment Successful!</h1>
-              <p className="text-white/70 text-lg">{message}</p>
+              <h1 className="text-4xl sm:text-5xl font-bold text-foreground">Payment Successful!</h1>
+              <p className="text-foreground/70 text-lg">{message}</p>
               {orderId && (
-                <p className="text-white/60 text-sm">Transaction ID: {orderId}</p>
+                <p className="text-foreground/60 text-sm">Transaction ID: {orderId}</p>
               )}
             </motion.div>
 
@@ -105,7 +105,7 @@ export default function VergeCallbackPage() {
                 </Button>
               </Link>
               <Link href="/shop">
-                <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 bg-transparent">
+                <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-accent bg-transparent">
                   Continue Shopping
                 </Button>
               </Link>
@@ -132,10 +132,10 @@ export default function VergeCallbackPage() {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="space-y-4"
             >
-              <h1 className="text-4xl sm:text-5xl font-bold text-white">Payment Failed</h1>
-              <p className="text-white/70 text-lg">{message}</p>
+              <h1 className="text-4xl sm:text-5xl font-bold text-foreground">Payment Failed</h1>
+              <p className="text-foreground/70 text-lg">{message}</p>
               {orderId && (
-                <p className="text-white/60 text-sm">Transaction ID: {orderId}</p>
+                <p className="text-foreground/60 text-sm">Transaction ID: {orderId}</p>
               )}
             </motion.div>
 
@@ -152,7 +152,7 @@ export default function VergeCallbackPage() {
                 </Button>
               </Link>
               <Link href="/cart">
-                <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 bg-transparent">
+                <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-accent bg-transparent">
                   Back to Cart
                 </Button>
               </Link>

@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { CheckCircle, ArrowRight, Package } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export default function CheckoutSuccessPage() {
+function CheckoutSuccessContent() {
   const searchParams = useSearchParams()
   const [orderId, setOrderId] = useState<string>("")
 
@@ -105,5 +105,17 @@ export default function CheckoutSuccessPage() {
         </motion.div>
       </motion.div>
     </div>
+  )
+}
+
+export default function CheckoutSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-background min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-foreground">Loading...</div>
+      </div>
+    }>
+      <CheckoutSuccessContent />
+    </Suspense>
   )
 }

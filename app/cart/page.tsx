@@ -12,7 +12,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="bg-black min-h-screen flex items-center justify-center">
+      <div className="bg-background min-h-screen flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -20,12 +20,12 @@ export default function CartPage() {
           className="text-center space-y-6"
         >
           <div className="flex justify-center">
-            <div className="bg-white/10 p-8 rounded-full">
-              <ShoppingBag className="h-16 w-16 text-white/60" />
+            <div className="bg-card p-8 rounded-full border border-border">
+              <ShoppingBag className="h-16 w-16 text-foreground/60" />
             </div>
           </div>
-          <h2 className="text-3xl font-bold text-white">Your cart is empty</h2>
-          <p className="text-white/60">Add some items to get started</p>
+          <h2 className="text-3xl font-bold text-foreground">Your cart is empty</h2>
+          <p className="text-foreground/60">Add some items to get started</p>
           <Link href="/shop">
             <Button size="lg" className="bg-[#f4b5c1] text-black hover:bg-[#f4b5c1]/90">
               Start Shopping
@@ -38,7 +38,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-background min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <motion.div
@@ -47,8 +47,8 @@ export default function CartPage() {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-2">Shopping Cart</h1>
-          <p className="text-white/60">
+          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-2">Shopping Cart</h1>
+          <p className="text-foreground/60">
             {totalItems} {totalItems === 1 ? "item" : "items"} in your cart
           </p>
         </motion.div>
@@ -65,11 +65,11 @@ export default function CartPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-neutral-950 rounded-lg p-6 border border-white/10"
+                  className="bg-card rounded-lg p-6 border border-border"
                 >
                   <div className="flex gap-6">
                     {/* Product Image */}
-                    <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 rounded-lg overflow-hidden bg-neutral-900">
+                    <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
                       <Image
                         src={item.product.images[0] || "/placeholder.svg"}
                         alt={item.product.name}
@@ -83,15 +83,15 @@ export default function CartPage() {
                       <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
                         <div className="min-w-0">
                           <Link href={`/product/${item.product.id}`}>
-                            <h3 className="text-white font-semibold hover:text-[#f4b5c1] transition-colors text-sm sm:text-base truncate">
+                            <h3 className="text-foreground font-semibold hover:text-[#f4b5c1] transition-colors text-sm sm:text-base truncate">
                               {item.product.name}
                             </h3>
                           </Link>
-                          <p className="text-white/60 text-xs sm:text-sm mt-1">
+                          <p className="text-foreground/60 text-xs sm:text-sm mt-1">
                             Size: {item.size} • {item.product.category}
                           </p>
                         </div>
-                        <p className="text-white font-bold text-sm sm:text-base flex-shrink-0">
+                        <p className="text-foreground font-bold text-sm sm:text-base flex-shrink-0">
                           ₦{item.product.price.toLocaleString()}
                         </p>
                       </div>
@@ -103,16 +103,16 @@ export default function CartPage() {
                             variant="outline"
                             size="sm"
                             onClick={() => updateQuantity(item.product.id, item.size, item.quantity - 1)}
-                            className="border-white/20 text-white hover:bg-white/10 h-8 w-8 p-0 text-xs"
+                            className="border-border text-foreground hover:bg-accent h-8 w-8 p-0 text-xs"
                           >
                             -
                           </Button>
-                          <span className="text-white font-medium w-6 text-center text-sm">{item.quantity}</span>
+                          <span className="text-foreground font-medium w-6 text-center text-sm">{item.quantity}</span>
                           <Button
                             variant="outline"
                             size="sm"
                             onClick={() => updateQuantity(item.product.id, item.size, item.quantity + 1)}
-                            className="border-white/20 text-white hover:bg-white/10 h-8 w-8 p-0 text-xs"
+                            className="border-border text-foreground hover:bg-accent h-8 w-8 p-0 text-xs"
                           >
                             +
                           </Button>
@@ -132,10 +132,10 @@ export default function CartPage() {
                       </div>
 
                       {/* Subtotal */}
-                      <div className="pt-3 sm:pt-4 border-t border-white/10">
+                      <div className="pt-3 sm:pt-4 border-t border-border">
                         <div className="flex justify-between text-xs sm:text-sm">
-                          <span className="text-white/60">Subtotal</span>
-                          <span className="text-white font-semibold">
+                          <span className="text-foreground/60">Subtotal</span>
+                          <span className="text-foreground font-semibold">
                             ₦{(item.product.price * item.quantity).toLocaleString()}
                           </span>
                         </div>
@@ -154,20 +154,20 @@ export default function CartPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-1"
           >
-            <div className="bg-neutral-950 rounded-lg p-6 border border-white/10 sticky top-24 space-y-6">
-              <h2 className="text-2xl font-bold text-white">Order Summary</h2>
+            <div className="bg-card rounded-lg p-6 border border-border sticky top-24 space-y-6">
+              <h2 className="text-2xl font-bold text-foreground">Order Summary</h2>
 
               <div className="space-y-4">
-                <div className="flex justify-between text-white/60">
+                <div className="flex justify-between text-foreground/60">
                   <span>Subtotal</span>
                   <span>₦{totalPrice.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between text-white/60">
+                <div className="flex justify-between text-foreground/60">
                   <span>Shipping</span>
                   <span>Calculated at checkout</span>
                 </div>
-                <div className="border-t border-white/10 pt-4">
-                  <div className="flex justify-between text-white text-xl font-bold">
+                <div className="border-t border-border pt-4">
+                  <div className="flex justify-between text-foreground text-xl font-bold">
                     <span>Total</span>
                     <span>₦{totalPrice.toLocaleString()}</span>
                   </div>
@@ -185,23 +185,23 @@ export default function CartPage() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full border-white/20 text-white hover:bg-white/10 bg-transparent"
+                  className="w-full border-border text-foreground hover:bg-accent bg-transparent"
                 >
                   Continue Shopping
                 </Button>
               </Link>
 
               {/* Trust Badges */}
-              <div className="pt-6 border-t border-white/10 space-y-3">
-                <div className="flex items-center gap-3 text-sm text-white/60">
+              <div className="pt-6 border-t border-border space-y-3">
+                <div className="flex items-center gap-3 text-sm text-foreground/60">
                   <div className="w-2 h-2 bg-green-400 rounded-full" />
                   <span>Secure checkout</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-white/60">
+                <div className="flex items-center gap-3 text-sm text-foreground/60">
                   <div className="w-2 h-2 bg-green-400 rounded-full" />
                   <span>Free shipping over ₦50,000</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-white/60">
+                <div className="flex items-center gap-3 text-sm text-foreground/60">
                   <div className="w-2 h-2 bg-green-400 rounded-full" />
                   <span>Easy returns within 30 days</span>
                 </div>

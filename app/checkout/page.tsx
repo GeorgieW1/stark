@@ -134,7 +134,7 @@ export default function CheckoutPage() {
   const finalTotal = totalPrice + shippingFee
 
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-background min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <motion.div
@@ -143,8 +143,8 @@ export default function CheckoutPage() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-2">Checkout</h1>
-          <div className="flex items-center justify-center gap-2 text-white/60">
+          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-2">Checkout</h1>
+          <div className="flex items-center justify-center gap-2 text-foreground/60">
             <Lock className="h-4 w-4" />
             <span className="text-sm">Secure checkout</span>
           </div>
@@ -159,13 +159,13 @@ export default function CheckoutPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-neutral-950 rounded-lg p-6 border border-white/10 space-y-6"
+                className="bg-card rounded-lg p-6 border border-border space-y-6"
               >
-                <h2 className="text-2xl font-bold text-white">Contact Information</h2>
+                <h2 className="text-2xl font-bold text-foreground">Contact Information</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="fullName" className="text-white">
+                    <Label htmlFor="fullName" className="text-foreground">
                       Full Name
                     </Label>
                     <Input
@@ -174,13 +174,13 @@ export default function CheckoutPage() {
                       value={formData.fullName}
                       onChange={handleChange}
                       required
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                      className="bg-background border-border text-foreground placeholder:text-foreground/50"
                       placeholder="John Doe"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-white">
+                    <Label htmlFor="email" className="text-foreground">
                       Email
                     </Label>
                     <Input
@@ -190,13 +190,13 @@ export default function CheckoutPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                      className="bg-background border-border text-foreground placeholder:text-foreground/50"
                       placeholder="john@example.com"
                     />
                   </div>
 
                   <div className="space-y-2 sm:col-span-2">
-                    <Label htmlFor="phone" className="text-white">
+                    <Label htmlFor="phone" className="text-foreground">
                       Phone Number
                     </Label>
                     <Input
@@ -206,7 +206,7 @@ export default function CheckoutPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                      className="bg-background border-border text-foreground placeholder:text-foreground/50"
                       placeholder="+234 800 000 0000"
                     />
                   </div>
@@ -218,13 +218,13 @@ export default function CheckoutPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-neutral-950 rounded-lg p-6 border border-white/10 space-y-6"
+                className="bg-card rounded-lg p-6 border border-border space-y-6"
               >
-                <h2 className="text-2xl font-bold text-white">Shipping Address</h2>
+                <h2 className="text-2xl font-bold text-foreground">Shipping Address</h2>
 
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="address" className="text-white">
+                    <Label htmlFor="address" className="text-foreground">
                       Street Address
                     </Label>
                     <Input
@@ -233,14 +233,14 @@ export default function CheckoutPage() {
                       value={formData.address}
                       onChange={handleChange}
                       required
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                      className="bg-background border-border text-foreground placeholder:text-foreground/50"
                       placeholder="123 Main Street"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="city" className="text-white">
+                      <Label htmlFor="city" className="text-foreground">
                         City
                       </Label>
                       <Input
@@ -249,13 +249,13 @@ export default function CheckoutPage() {
                         value={formData.city}
                         onChange={handleChange}
                         required
-                        className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                        className="bg-background border-border text-foreground placeholder:text-foreground/50"
                         placeholder="Lagos"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="state" className="text-white">
+                      <Label htmlFor="state" className="text-foreground">
                         State
                       </Label>
                       <Input
@@ -264,7 +264,7 @@ export default function CheckoutPage() {
                         value={formData.state}
                         onChange={handleChange}
                         required
-                        className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                        className="bg-background border-border text-foreground placeholder:text-foreground/50"
                         placeholder="Lagos"
                       />
                     </div>
@@ -277,18 +277,18 @@ export default function CheckoutPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-neutral-950 rounded-lg p-6 border border-white/10 space-y-6"
+                className="bg-card rounded-lg p-6 border border-border space-y-6"
               >
-                <h2 className="text-2xl font-bold text-white">Payment Method</h2>
+                <h2 className="text-2xl font-bold text-foreground">Payment Method</h2>
 
                 <div className="space-y-4">
-                  <div className="flex items-center gap-4 p-4 rounded-lg border border-white/20 bg-white/5">
+                  <div className="flex items-center gap-4 p-4 rounded-lg border border-border bg-accent">
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <CreditCard className="h-5 w-5 text-white" />
-                        <span className="text-white font-medium">Verge Payment</span>
+                        <CreditCard className="h-5 w-5 text-foreground" />
+                        <span className="text-foreground font-medium">Verge Payment</span>
                       </div>
-                      <p className="text-white/60 text-sm mt-1">
+                      <p className="text-foreground/60 text-sm mt-1">
                         Pay securely via USSD, Card, NQR, or Bank Transfer - All payment channels available
                       </p>
                     </div>
@@ -304,14 +304,14 @@ export default function CheckoutPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="lg:col-span-1"
             >
-              <div className="bg-neutral-950 rounded-lg p-6 border border-white/10 sticky top-24 space-y-6">
-                <h2 className="text-2xl font-bold text-white">Order Summary</h2>
+              <div className="bg-card rounded-lg p-6 border border-border sticky top-24 space-y-6">
+                <h2 className="text-2xl font-bold text-foreground">Order Summary</h2>
 
                 {/* Items */}
                 <div className="space-y-4 max-h-64 overflow-y-auto">
                   {items.map((item) => (
                     <div key={`${item.product.id}-${item.size}`} className="flex gap-4">
-                      <div className="relative w-16 h-16 flex-shrink-0 rounded bg-neutral-900 overflow-hidden">
+                      <div className="relative w-16 h-16 flex-shrink-0 rounded bg-muted overflow-hidden">
                         <Image
                           src={item.product.images[0] || "/placeholder.svg"}
                           alt={item.product.name}
@@ -324,9 +324,9 @@ export default function CheckoutPage() {
                         </div>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-sm font-medium truncate">{item.product.name}</p>
-                        <p className="text-white/60 text-xs">Size: {item.size}</p>
-                        <p className="text-white text-sm font-semibold mt-1">
+                        <p className="text-foreground text-sm font-medium truncate">{item.product.name}</p>
+                        <p className="text-foreground/60 text-xs">Size: {item.size}</p>
+                        <p className="text-foreground text-sm font-semibold mt-1">
                           ₦{(item.product.price * item.quantity).toLocaleString()}
                         </p>
                       </div>
@@ -335,17 +335,17 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Totals */}
-                <div className="space-y-4 border-t border-white/10 pt-6">
-                  <div className="flex justify-between text-white/60">
+                <div className="space-y-4 border-t border-border pt-6">
+                  <div className="flex justify-between text-foreground/60">
                     <span>Subtotal</span>
                     <span>₦{totalPrice.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-white/60">
+                  <div className="flex justify-between text-foreground/60">
                     <span>Shipping</span>
                     <span>{shippingFee === 0 ? "Free" : `₦${shippingFee.toLocaleString()}`}</span>
                   </div>
-                  <div className="border-t border-white/10 pt-4">
-                    <div className="flex justify-between text-white text-xl font-bold">
+                  <div className="border-t border-border pt-4">
+                    <div className="flex justify-between text-foreground text-xl font-bold">
                       <span>Total</span>
                       <span>₦{finalTotal.toLocaleString()}</span>
                     </div>
@@ -372,7 +372,7 @@ export default function CheckoutPage() {
                   )}
                 </Button>
 
-                <p className="text-white/60 text-xs text-center">
+                <p className="text-foreground/60 text-xs text-center">
                   By completing your order, you agree to our Terms of Service and Privacy Policy
                 </p>
               </div>

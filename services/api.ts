@@ -16,7 +16,22 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  timeout: 30000, // 30 seconds timeout
 })
+
+// Add request interceptor for logging
+api.interceptors.request.use(
+  (config) => {
+    if (process.env.NODE_ENV === "development") {
+      console.log(`[API] ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`)
+    }
+    return config
+  },
+  (error) => {
+    console.error("[API] Request error:", error)
+    return Promise.reject(error)
+  }
+)
 
 // Add authentication token to requests if available
 api.interceptors.request.use((config) => {
@@ -29,10 +44,16 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Handle API errors
+// Add response interceptor for error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Log error details for debugging
+    if (error.code === "ERR_NETWORK") {
+      console.error("[API] Network Error - Check if backend is running and API_BASE_URL is correct:", API_BASE_URL)
+      console.error("[API] Make sure backend server is running and CORS is configured")
+    }
+    
     if (error.response?.status === 401) {
       // Unauthorized - clear token and redirect to login
       if (typeof window !== "undefined") {
@@ -148,7 +169,7 @@ export const orderAPI = {
       city: string
       state: string
     }
-    paymentMethod: "paystack" | "flutterwave" | "verge"
+    paymentMethod: "verge"
     subtotal: number
     shipping: number
     total: number

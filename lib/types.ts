@@ -29,5 +29,5 @@ export interface CheckoutFormData {
   address: string
   city: string
   state: string
-  paymentMethod: "paystack" | "flutterwave" | "verge"
+  paymentMethod: "verge"
 }

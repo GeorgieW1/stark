@@ -25,7 +25,7 @@ export default function CheckoutPage() {
     address: "",
     city: "",
     state: "",
-    paymentMethod: "paystack",
+    paymentMethod: "verge",
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -98,8 +98,20 @@ export default function CheckoutPage() {
       router.push(`/checkout/success?orderId=${orderId}`)
     } catch (error: any) {
       console.error("Checkout error:", error)
-      const errorMessage =
-        error.response?.data?.message || "There was an error processing your order. Please try again."
+      
+      // Better error handling
+      let errorMessage = "There was an error processing your order. Please try again."
+      
+      if (error.code === "ERR_NETWORK" || error.message === "Network Error") {
+        errorMessage = "Unable to connect to server. Please check your internet connection or contact support if the problem persists."
+      } else if (error.response) {
+        // Server responded with error status
+        errorMessage = error.response?.data?.message || error.response?.data?.error || errorMessage
+      } else if (error.request) {
+        // Request was made but no response received
+        errorMessage = "Server is not responding. Please try again later or contact support."
+      }
+      
       alert(errorMessage)
     } finally {
       setLoading(false)
@@ -270,59 +282,17 @@ export default function CheckoutPage() {
                 <h2 className="text-2xl font-bold text-white">Payment Method</h2>
 
                 <div className="space-y-4">
-                  <label className="flex items-center gap-4 p-4 rounded-lg border border-white/20 cursor-pointer hover:bg-white/5 transition-colors">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="paystack"
-                      checked={formData.paymentMethod === "paystack"}
-                      onChange={handleChange}
-                      className="w-4 h-4 text-[#f4b5c1]"
-                    />
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <CreditCard className="h-5 w-5 text-white" />
-                        <span className="text-white font-medium">Paystack</span>
-                      </div>
-                      <p className="text-white/60 text-sm mt-1">Pay securely with card or bank transfer</p>
-                    </div>
-                  </label>
-
-                  <label className="flex items-center gap-4 p-4 rounded-lg border border-white/20 cursor-pointer hover:bg-white/5 transition-colors">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="flutterwave"
-                      checked={formData.paymentMethod === "flutterwave"}
-                      onChange={handleChange}
-                      className="w-4 h-4 text-[#f4b5c1]"
-                    />
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <CreditCard className="h-5 w-5 text-white" />
-                        <span className="text-white font-medium">Flutterwave</span>
-                      </div>
-                      <p className="text-white/60 text-sm mt-1">Multiple payment options available</p>
-                    </div>
-                  </label>
-
-                  <label className="flex items-center gap-4 p-4 rounded-lg border border-white/20 cursor-pointer hover:bg-white/5 transition-colors">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="verge"
-                      checked={formData.paymentMethod === "verge"}
-                      onChange={handleChange}
-                      className="w-4 h-4 text-[#f4b5c1]"
-                    />
+                  <div className="flex items-center gap-4 p-4 rounded-lg border border-white/20 bg-white/5">
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
                         <CreditCard className="h-5 w-5 text-white" />
                         <span className="text-white font-medium">Verge Payment</span>
                       </div>
-                      <p className="text-white/60 text-sm mt-1">USSD, Card, NQR, or Bank Transfer - All payment channels</p>
+                      <p className="text-white/60 text-sm mt-1">
+                        Pay securely via USSD, Card, NQR, or Bank Transfer - All payment channels available
+                      </p>
                     </div>
-                  </label>
+                  </div>
                 </div>
               </motion.div>
             </div>

@@ -46,7 +46,8 @@ export default function HomePage() {
               muted
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
-              preload="auto"
+              preload="metadata"
+              poster="/stark-hero-lifestyle.jpg"
               onCanPlay={() => {
                 setVideoReady(true)
               }}
@@ -80,39 +81,47 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#f4b5c1]/10 via-transparent to-[#f4b5c1]/10 animate-pulse" />
         </div>
 
-        {/* Floating Elements - Only render on client */}
+        {/* Enhanced Floating Elements - Only render on client */}
         {isMounted && (
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            {[...Array(6)].map((_, i) => {
+            {[...Array(8)].map((_, i) => {
               // Use deterministic values based on index to avoid hydration mismatch
               const positions = [
-                { x: 15, y: 20 },
-                { x: 65, y: 45 },
-                { x: 35, y: 70 },
-                { x: 80, y: 30 },
-                { x: 50, y: 85 },
-                { x: 90, y: 60 },
+                { x: 15, y: 20, size: 2 },
+                { x: 65, y: 45, size: 3 },
+                { x: 35, y: 70, size: 1.5 },
+                { x: 80, y: 30, size: 2.5 },
+                { x: 50, y: 85, size: 2 },
+                { x: 90, y: 60, size: 1.5 },
+                { x: 25, y: 50, size: 3 },
+                { x: 75, y: 15, size: 2 },
               ]
-              const pos = positions[i] || { x: 50, y: 50 }
+              const pos = positions[i] || { x: 50, y: 50, size: 2 }
               
               return (
                 <motion.div
                   key={i}
-                  className="absolute w-2 h-2 bg-[#f4b5c1]/30 rounded-full"
+                  className={`absolute bg-[#f4b5c1]/20 rounded-full blur-[0.5px]`}
+                  style={{
+                    width: `${pos.size}px`,
+                    height: `${pos.size}px`,
+                  }}
                   initial={{
                     x: `${pos.x}%`,
                     y: `${pos.y}%`,
-                    opacity: 0.3,
+                    opacity: 0.2,
+                    scale: 0.5,
                   }}
                   animate={{
-                    y: [`${pos.y}%`, `${(pos.y + 30) % 100}%`, `${pos.y}%`],
-                    x: [`${pos.x}%`, `${(pos.x + 20) % 100}%`, `${pos.x}%`],
-                    opacity: [0.3, 0.6, 0.3],
+                    y: [`${pos.y}%`, `${(pos.y + 40) % 100}%`, `${pos.y}%`],
+                    x: [`${pos.x}%`, `${(pos.x + 25) % 100}%`, `${pos.x}%`],
+                    opacity: [0.2, 0.7, 0.2],
+                    scale: [0.5, 1.2, 0.5],
                   }}
                   transition={{
-                    duration: 8 + i * 2,
+                    duration: 12 + i * 3,
                     repeat: Number.POSITIVE_INFINITY,
-                    ease: "linear",
+                    ease: "easeInOut",
                   }}
                 />
               )

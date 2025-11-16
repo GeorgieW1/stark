@@ -15,9 +15,30 @@ export default function HomePage() {
   const [isMounted, setIsMounted] = useState(false)
   const [videoReady, setVideoReady] = useState(false)
   const [videoError, setVideoError] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
 
   useEffect(() => {
     setIsMounted(true)
+    
+    // Check if mobile for performance optimization
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setPrefersReducedMotion(mediaQuery.matches)
+    
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches)
+    }
+    
+    mediaQuery.addEventListener('change', handleMotionChange)
+    
     const loadProducts = async () => {
       try {
         const products = await productAPI.getAll()
@@ -30,10 +51,23 @@ export default function HomePage() {
     }
 
     loadProducts()
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+      mediaQuery.removeEventListener('change', handleMotionChange)
+    }
   }, [])
 
   return (
     <div className="bg-background">
+      {/* Skip to Content - Accessibility */}
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-white text-black px-4 py-2 rounded-md font-semibold shadow-lg transition-all duration-200 hover:bg-[#f4b5c1]"
+      >
+        Skip to main content
+      </a>
+      
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Video Background */}
@@ -82,9 +116,9 @@ export default function HomePage() {
         </div>
 
         {/* Enhanced Floating Elements - Only render on client */}
-        {isMounted && (
+        {isMounted && !prefersReducedMotion && (
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            {[...Array(8)].map((_, i) => {
+            {[...Array(isMobile ? 4 : 8)].map((_, i) => {
               // Use deterministic values based on index to avoid hydration mismatch
               const positions = [
                 { x: 15, y: 20, size: 2 },
@@ -281,7 +315,7 @@ export default function HomePage() {
       </section>
 
         {/* Featured Products */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+        <section id="main-content" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

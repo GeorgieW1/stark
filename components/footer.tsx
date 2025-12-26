@@ -9,7 +9,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold">
-              <span className="text-foreground">STARK</span>
+              <span className="text-foreground">VORTEX</span>
             </h3>
             <p className="text-foreground/60 text-sm">Premium Nigerian streetwear. Crafted in Lagos, worn worldwide.</p>
           </div>
@@ -51,7 +51,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@stark.com" className="hover:text-foreground transition-colors">
+                <a href="mailto:support@vortex.com" className="hover:text-foreground transition-colors">
                   Contact Us
                 </a>
               </li>
@@ -97,7 +97,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-foreground/60">
-          <p>&copy; {new Date().getFullYear()} STARK. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} VORTEX. All rights reserved.</p>
         </div>
       </div>
     </footer>

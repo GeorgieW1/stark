@@ -21,15 +21,15 @@ const outfit = Outfit({
 // ✅ Enhanced SEO metadata
 export const metadata: Metadata = {
   title: {
-    default: "STARK - Premium Nigerian Streetwear",
-    template: "%s | STARK",
+    default: "VORTEX - Premium Nigerian Streetwear",
+    template: "%s | VORTEX",
   },
   description:
-    "STARK: Premium unisex streetwear designed in Lagos. Best travel outfits, nationwide delivery. Order, pay, receive.",
-  keywords: ["streetwear", "Nigerian fashion", "Lagos", "unisex clothing", "premium fashion", "STARK"],
-  authors: [{ name: "STARK" }],
-  creator: "STARK",
-  publisher: "STARK",
+    "VORTEX: Premium unisex streetwear designed in Lagos. Best travel outfits, nationwide delivery. Order, pay, receive.",
+  keywords: ["streetwear", "Nigerian fashion", "Lagos", "unisex clothing", "premium fashion", "VORTEX"],
+  authors: [{ name: "VORTEX" }],
+  creator: "VORTEX",
+  publisher: "VORTEX",
   formatDetection: {
     email: false,
     address: false,
@@ -40,23 +40,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    siteName: "STARK",
-    title: "STARK - Premium Nigerian Streetwear",
+    siteName: "VORTEX",
+    title: "VORTEX - Premium Nigerian Streetwear",
     description: "Premium unisex streetwear designed in Lagos. Best travel outfits, nationwide delivery.",
     images: [
       {
-        url: "/stark-hero-lifestyle.jpg",
+        url: "/vortex-hero-lifestyle.jpg",
         width: 1200,
         height: 630,
-        alt: "STARK Premium Streetwear",
+        alt: "VORTEX Premium Streetwear",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "STARK - Premium Nigerian Streetwear",
+    title: "VORTEX - Premium Nigerian Streetwear",
     description: "Premium unisex streetwear designed in Lagos. Best travel outfits, nationwide delivery.",
-    images: ["/stark-hero-lifestyle.jpg"],
+    images: ["/vortex-hero-lifestyle.jpg"],
   },
   robots: {
     index: true,

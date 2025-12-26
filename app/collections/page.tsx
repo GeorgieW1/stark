@@ -68,7 +68,7 @@ export default function CollectionsPage() {
                 transition={{ delay: 0.4, duration: 0.8 }}
                 className="block text-[#f4b5c1] bg-gradient-to-r from-[#f4b5c1] to-[#f4b5c1]/60 bg-clip-text text-transparent"
               >
-                by STARK
+                by VORTEX
               </motion.span>
             </h1>
 
@@ -101,9 +101,8 @@ export default function CollectionsPage() {
               >
                 <Link href={`/shop?collection=${collection.id}`}>
                   <div
-                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${
-                      isEven ? "" : "lg:flex-row-reverse"
-                    }`}
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${isEven ? "" : "lg:flex-row-reverse"
+                      }`}
                   >
                     {/* Image Section */}
                     <motion.div
@@ -117,13 +116,13 @@ export default function CollectionsPage() {
                           className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
                           style={{ backgroundImage: `url(${collection.image})` }}
                         />
-                        
+
                         {/* Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
-                        
+
                         {/* Accent Border Effect */}
                         <div className="absolute inset-0 border-2 border-[#f4b5c1]/0 group-hover:border-[#f4b5c1]/30 rounded-2xl transition-all duration-500" />
-                        
+
                         {/* Decorative Corner Element */}
                         <div className="absolute top-4 right-4 w-16 h-16 border-t-2 border-r-2 border-[#f4b5c1]/20 rounded-tr-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="absolute bottom-4 left-4 w-16 h-16 border-b-2 border-l-2 border-[#f4b5c1]/20 rounded-bl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

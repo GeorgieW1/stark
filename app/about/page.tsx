@@ -14,7 +14,7 @@ export default function AboutPage() {
             className="text-center space-y-6 mb-16"
           >
             <h1 className="text-5xl sm:text-6xl font-bold text-foreground">
-              About <span className="text-[#f4b5c1]">STARK</span>
+              About <span className="text-[#f4b5c1]">VORTEX</span>
             </h1>
             <p className="text-foreground/70 text-xl">Where culture meets fashion</p>
           </motion.div>
@@ -27,7 +27,7 @@ export default function AboutPage() {
           >
             <div className="text-foreground/80 text-lg leading-relaxed space-y-6">
               <p>
-                STARK was born from a simple vision: to create premium streetwear that celebrates Nigerian culture
+                VORTEX was born from a simple vision: to create premium streetwear that celebrates Nigerian culture
                 and creativity while competing on the global stage.
               </p>
 

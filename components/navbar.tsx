@@ -30,7 +30,7 @@ export function Navbar() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
-              STARK
+              VORTEX
             </motion.span>
           </Link>
 
@@ -50,7 +50,7 @@ export function Navbar() {
           {/* Cart, Theme Toggle & Mobile Menu */}
           <div className="flex items-center gap-4">
             <ThemeToggle />
-            
+
             <Link href="/cart">
               <Button
                 variant="ghost"

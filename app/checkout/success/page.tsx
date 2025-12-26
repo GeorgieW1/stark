@@ -61,7 +61,7 @@ function CheckoutSuccessContent() {
           <div className="flex items-center justify-center gap-3 text-[#f4b5c1]">
             <Package className="h-6 w-6" />
             <span className="font-semibold">
-              {orderId ? `Order #${orderId}` : `Order #STARK-${Math.random().toString(36).substr(2, 9).toUpperCase()}`}
+              {orderId ? `Order #${orderId}` : `Order #VORTEX-${Math.random().toString(36).substr(2, 9).toUpperCase()}`}
             </span>
           </div>
 
@@ -99,7 +99,7 @@ function CheckoutSuccessContent() {
           className="pt-8 border-t border-border space-y-3"
         >
           <p className="text-foreground/60 text-sm">Need help with your order?</p>
-          <a href="mailto:support@stark.com" className="text-[#f4b5c1] hover:underline text-sm font-medium">
+          <a href="mailto:support@vortex.com" className="text-[#f4b5c1] hover:underline text-sm font-medium">
             Contact our support team
           </a>
         </motion.div>
